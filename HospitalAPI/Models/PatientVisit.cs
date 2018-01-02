@@ -24,7 +24,6 @@ namespace HospitalAPI.Models
         public Status Status { get; set; }
 
         public ICollection<PatientVisitMedication> Medications { get; set; }
-        public ICollection<PatientVisitProcedure> Procedures { get; set; }
 
     }
 

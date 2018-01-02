@@ -18,8 +18,6 @@ namespace HospitalAPI.Models
         public DbSet<Patient> Patients { get; set; }
         public DbSet<PatientVisit> PatientVisits { get; set; }
         public DbSet<Medication> Medications { get; set; }
-        public DbSet<Procedure> Procedures { get; set; }
-        public DbSet<PatientVisitProcedure> PatientVisitProcedures { get; set; }
         public DbSet<PatientVisitMedication> PatientVisitMedication { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

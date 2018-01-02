@@ -36,7 +36,7 @@ namespace HospitalAPI.Controllers
         [ResponseType(typeof(ClinicDetailDTO))]
         public IHttpActionResult GetClinic(int id)
         {
-            var clinic = clinicRepository.GetClinicById(id);
+            var clinic = clinicRepository.ClinicDetails(id);
 
             if (clinic == null)
             {
@@ -93,7 +93,7 @@ namespace HospitalAPI.Controllers
         [HttpDelete]
         public IHttpActionResult DeleteClinic(int id)
         {
-            var clinic = clinicRepository.GetClinic(id);
+            var clinic = clinicRepository.GetClinicById(id);
             if (clinic == null)
             {
                 return NotFound();
@@ -104,5 +104,21 @@ namespace HospitalAPI.Controllers
 
             return Ok(clinic);
         }
+
+        [Route("~/api/clinics/addDepartment")]
+        public IHttpActionResult PostDepartment(Department department)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            clinicRepository.AddDepartment(department);
+            clinicRepository.Save();
+
+            return StatusCode(HttpStatusCode.Created);
+
+        }
+
     }
 }

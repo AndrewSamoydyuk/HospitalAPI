@@ -37,7 +37,7 @@ namespace HospitalAPI.DALs
             return clinics;
         }
 
-        public ClinicDetailDTO GetClinicById(int id)
+        public ClinicDetailDTO ClinicDetails(int id)
         {
             var clinic = (from c in db.Clinics
                           where c.Id == id
@@ -47,14 +47,15 @@ namespace HospitalAPI.DALs
                               Name = c.Name,
                               Address = c.Address,
                               ImageUri = c.ImageUri,
-                              Departments = db.Departments.Where(d=>d.ClinicID == id).Select(AsDepartmentDto).ToList()
+                              Departments = db.Departments.Where(d=>d.ClinicID == id).Select(AsDepartmentDto).ToList(),
+                              CountOfDepartments = db.Departments.Where(d => d.ClinicID == id).Count()
 
                           }).SingleOrDefault();
 
             return clinic;
         }
 
-        public Clinic GetClinic(int id)
+        public Clinic GetClinicById(int id)
         {
             return db.Clinics.Find(id);
         }
@@ -72,6 +73,11 @@ namespace HospitalAPI.DALs
         public void AddClinic(Clinic clinic)
         {
             db.Clinics.Add(clinic);
+        }
+
+        public void AddDepartment(Department department)
+        {
+            db.Departments.Add(department);
         }
 
         public void Save()

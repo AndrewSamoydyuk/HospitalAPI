@@ -1,8 +1,8 @@
 ﻿function AddClinic(){
-    var customer = { Name: "NewName", Address: "newAddress", ImageUri: "Url" };
+    var clinic = { Name: "NewName", Address: "newAddress", ImageUri: "Url" };
     $.ajax({
         type: "POST",
-        data: JSON.stringify(customer),
+        data: JSON.stringify(clinic),
         url: "api/Clinics",
         contentType: "application/json"
     });
@@ -16,11 +16,21 @@ function DeleteClinic(id) {
 };
 
 function UpdateClinic() {
-    var customer = { Id:5, Name: "Update", Address: "Update", ImageUri: "Update" };
+    var clinic = { Id:5, Name: "Update", Address: "Update", ImageUri: "Update" };
     $.ajax({
         type: "PUT",
-        data: JSON.stringify(customer),
+        data: JSON.stringify(clinic),
         url: "api/Clinics/5",
+        contentType: "application/json"
+    });
+};
+
+function AddDepartment() {
+    var department = { Name: "NewNameForDepartment", ClinicID: 1 };
+    $.ajax({
+        type: "POST",
+        data: JSON.stringify(department),
+        url: "api/clinics/addDepartment",
         contentType: "application/json"
     });
 };

@@ -15,6 +15,8 @@ namespace HospitalAPI.DTOs
 
         public string ImageUri { get; set; }
 
+        public int CountOfDepartments { get; set; }
+
         public List<DepartmentDTO> Departments { get; set; }
     }
 }

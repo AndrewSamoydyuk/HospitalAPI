@@ -156,30 +156,6 @@
             );
             context.SaveChanges();
 
-            var procedures = new List<Procedure>
-                {
-                    new Procedure() { Name= "Blood test", Price= 5, Description= "A blood test is a laboratory analysis performed on a blood sample that is usually extracted from a vein in the arm using a hypodermic needle, or via fingerprick." },
-                    new Procedure() { Name= "Endoscopy", Price= 10, Description= "An endoscopy (looking inside) is used in medicine to look inside the body." },
-                    new Procedure() { Name= "Angiography", Price= 3, Description= "Angiography or arteriography is a medical imaging technique used to visualize the inside, or lumen, of blood vessels and organs of the body, with particular interest in the arteries, veins and the heart chambers." },
-                    new Procedure() { Name= "Politzerization", Price= 5, Description= "Politzerization, also called the Politzer maneuver or method, is a medical procedure that involves inflating the middle ear by blowing air up the nose during the act of swallowing." },
-                    new Procedure() { Name= "Apheresis", Price= 6, Description= "Apheresis is a medical technology in which the blood of a person is passed through an apparatus that separates out one particular constituent and returns the remainder to the circulation." },
-                    new Procedure() { Name= "Chemotherapy", Price= 7, Description= "Chemotherapy (often abbreviated to chemo and sometimes CTX or CTx) is a category of cancer treatment that uses one or more anti-cancer drugs (chemotherapeutic agents) as part of a standardized chemotherapy regimen." },
-                    new Procedure() { Name= "Shock therapy", Price= 9, Description= "Electroconvulsive therapy (ECT), formerly known as electroshock therapy, and often referred to as shock treatment, is a psychiatric treatment in which seizures are electrically induced in patients to provide relief from mental disorders." },
-                };
-
-            procedures.ForEach(p => context.Procedures.AddOrUpdate(d => d.Id, p));
-            context.SaveChanges();
-
-            context.PatientVisitProcedures.AddOrUpdate(
-                new PatientVisitProcedure() { CountOfDays = 3, ProcedureID = procedures.Single(m => m.Name == "Blood test").Id, PatientVisitID = patientVisits.Single(v => v.Id == 1).Id },
-                new PatientVisitProcedure() { CountOfDays = 2, ProcedureID = procedures.Single(m => m.Name == "Endoscopy").Id, PatientVisitID = patientVisits.Single(v => v.Id == 1).Id },
-                new PatientVisitProcedure() { CountOfDays = 6, ProcedureID = procedures.Single(m => m.Name == "Angiography").Id, PatientVisitID = patientVisits.Single(v => v.Id == 1).Id },
-                new PatientVisitProcedure() { CountOfDays = 7, ProcedureID = procedures.Single(m => m.Name == "Politzerization").Id, PatientVisitID = patientVisits.Single(v => v.Id == 2).Id },
-                new PatientVisitProcedure() { CountOfDays = 3, ProcedureID = procedures.Single(m => m.Name == "Apheresis").Id, PatientVisitID = patientVisits.Single(v => v.Id == 3).Id },
-                new PatientVisitProcedure() { CountOfDays = 7, ProcedureID = procedures.Single(m => m.Name == "Shock therapy").Id, PatientVisitID = patientVisits.Single(v => v.Id == 4).Id },
-                new PatientVisitProcedure() { CountOfDays = 8, ProcedureID = procedures.Single(m => m.Name == "Endoscopy").Id, PatientVisitID = patientVisits.Single(v => v.Id == 4).Id }
-            );
-            context.SaveChanges();
         }
     }
 }
