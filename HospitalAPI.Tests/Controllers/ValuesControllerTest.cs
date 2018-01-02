@@ -10,72 +10,72 @@ using HospitalAPI.Controllers;
 
 namespace HospitalAPI.Tests.Controllers
 {
-    [TestClass]
-    public class ValuesControllerTest
-    {
-        [TestMethod]
-        public void Get()
-        {
-            // Упорядочение
-            ValuesController controller = new ValuesController();
+    //[TestClass]
+    //public class ValuesControllerTest
+    //{
+    //    [TestMethod]
+    //    public void Get()
+    //    {
+    //        // Упорядочение
+    //        ValuesController controller = new ValuesController();
 
-            // Действие
-            IEnumerable<string> result = controller.Get();
+    //        // Действие
+    //        IEnumerable<string> result = controller.Get();
 
-            // Утверждение
-            Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.Count());
-            Assert.AreEqual("value1", result.ElementAt(0));
-            Assert.AreEqual("value2", result.ElementAt(1));
-        }
+    //        // Утверждение
+    //        Assert.IsNotNull(result);
+    //        Assert.AreEqual(2, result.Count());
+    //        Assert.AreEqual("value1", result.ElementAt(0));
+    //        Assert.AreEqual("value2", result.ElementAt(1));
+    //    }
 
-        [TestMethod]
-        public void GetById()
-        {
-            // Упорядочение
-            ValuesController controller = new ValuesController();
+    //    [TestMethod]
+    //    public void GetById()
+    //    {
+    //        // Упорядочение
+    //        ValuesController controller = new ValuesController();
 
-            // Действие
-            string result = controller.Get(5);
+    //        // Действие
+    //        string result = controller.Get(5);
 
-            // Утверждение
-            Assert.AreEqual("value", result);
-        }
+    //        // Утверждение
+    //        Assert.AreEqual("value", result);
+    //    }
 
-        [TestMethod]
-        public void Post()
-        {
-            // Упорядочение
-            ValuesController controller = new ValuesController();
+    //    [TestMethod]
+    //    public void Post()
+    //    {
+    //        // Упорядочение
+    //        ValuesController controller = new ValuesController();
 
-            // Действие
-            controller.Post("value");
+    //        // Действие
+    //        controller.Post("value");
 
-            // Утверждение
-        }
+    //        // Утверждение
+    //    }
 
-        [TestMethod]
-        public void Put()
-        {
-            // Упорядочение
-            ValuesController controller = new ValuesController();
+    //    [TestMethod]
+    //    public void Put()
+    //    {
+    //        // Упорядочение
+    //        ValuesController controller = new ValuesController();
 
-            // Действие
-            controller.Put(5, "value");
+    //        // Действие
+    //        controller.Put(5, "value");
 
-            // Утверждение
-        }
+    //        // Утверждение
+    //    }
 
-        [TestMethod]
-        public void Delete()
-        {
-            // Упорядочение
-            ValuesController controller = new ValuesController();
+    //    [TestMethod]
+    //    public void Delete()
+    //    {
+    //        // Упорядочение
+    //        ValuesController controller = new ValuesController();
 
-            // Действие
-            controller.Delete(5);
+    //        // Действие
+    //        controller.Delete(5);
 
-            // Утверждение
-        }
-    }
+    //        // Утверждение
+    //    }
+    //}
 }

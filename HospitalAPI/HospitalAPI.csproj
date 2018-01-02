@@ -182,8 +182,13 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\ClinicsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DALs\ClinicRepository.cs" />
+    <Compile Include="DALs\IClinicRepository.cs" />
+    <Compile Include="DTOs\ClinicDetailDTO.cs" />
+    <Compile Include="DTOs\ClinicDTO.cs" />
+    <Compile Include="DTOs\DepartmentDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
