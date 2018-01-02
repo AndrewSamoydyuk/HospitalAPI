@@ -19,7 +19,7 @@ namespace HospitalAPI.Models
         public string Address { get; set; }
 
         [Required]
-        public string ImagePath { get; set; }
+        public string ImageUri { get; set; }
 
         public ICollection<Department> Departments { get; set; }
     }

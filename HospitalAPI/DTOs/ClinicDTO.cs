@@ -13,6 +13,6 @@ namespace HospitalAPI.DTOs
 
         public string Address { get; set; }
 
-        public string ImagePath { get; set; }
+        public string ImageUri { get; set; }
     }
 }

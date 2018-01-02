@@ -24,7 +24,7 @@ namespace HospitalAPI.Models
         public string Speciality { get; set; }
 
         [Required]
-        public string ImagePath { get; set; }
+        public string ImageUri { get; set; }
 
         public int RoomNumber { get; set; }
 

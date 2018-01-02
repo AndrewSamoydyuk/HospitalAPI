@@ -192,13 +192,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801011738094_init.cs" />
-    <Compile Include="Migrations\201801011738094_init.Designer.cs">
-      <DependentUpon>201801011738094_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801012033494_AddModels.cs" />
-    <Compile Include="Migrations\201801012033494_AddModels.Designer.cs">
-      <DependentUpon>201801012033494_AddModels.cs</DependentUpon>
+    <Compile Include="Migrations\201801021416213_init.cs" />
+    <Compile Include="Migrations\201801021416213_init.Designer.cs">
+      <DependentUpon>201801021416213_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Clinic.cs" />
@@ -220,6 +216,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -289,11 +286,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801011738094_init.resx">
-      <DependentUpon>201801011738094_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801012033494_AddModels.resx">
-      <DependentUpon>201801012033494_AddModels.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801021416213_init.resx">
+      <DependentUpon>201801021416213_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

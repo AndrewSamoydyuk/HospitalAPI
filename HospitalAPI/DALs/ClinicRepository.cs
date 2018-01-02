@@ -31,7 +31,7 @@ namespace HospitalAPI.DALs
                               Id = c.Id,
                               Name = c.Name,
                               Address = c.Address,
-                              ImagePath = c.ImagePath
+                              ImageUri = c.ImageUri
                           };
 
             return clinics;
@@ -46,12 +46,32 @@ namespace HospitalAPI.DALs
                               Id = c.Id,
                               Name = c.Name,
                               Address = c.Address,
-                              ImagePath = c.ImagePath,
+                              ImageUri = c.ImageUri,
                               Departments = db.Departments.Where(d=>d.ClinicID == id).Select(AsDepartmentDto).ToList()
 
                           }).SingleOrDefault();
 
             return clinic;
+        }
+
+        public Clinic GetClinic(int id)
+        {
+            return db.Clinics.Find(id);
+        }
+
+        public void DeleteClinic(Clinic clinic)
+        {
+            db.Clinics.Remove(clinic);
+        }
+
+        public void UpdateClinic(Clinic clinic)
+        {
+            db.Entry(clinic).State = EntityState.Modified;  
+        }
+
+        public void AddClinic(Clinic clinic)
+        {
+            db.Clinics.Add(clinic);
         }
 
         public void Save()

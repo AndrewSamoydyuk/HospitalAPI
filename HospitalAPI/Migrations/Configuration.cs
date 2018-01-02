@@ -16,12 +16,13 @@
 
         protected override void Seed(HospitalContext context)
         {
+
             var clinics = new List<Clinic>
             {
-                new Clinic() { Name = "The Pennsylvania Hospital", Address = "800 Spruce St", ImagePath="Pennsylvania_Hospital.png" },
-                new Clinic() { Name = "Cleveland Clinic", Address = "2049 East 100th Street ", ImagePath="ClevelandClinic.jpg" },
-                new Clinic() { Name = "Hospital of St. Cross", Address = "St Cross Back St ", ImagePath="HospitalofStCross .jpg" },
-                new Clinic() { Name = "The American Hospital of Paris", Address = "63 Boulevard Victor Hugo ", ImagePath="AmericanHospital.jpg" }
+                new Clinic() { Name = "The Pennsylvania Hospital", Address = "800 Spruce St", ImageUri="Pennsylvania_Hospital.png" },
+                new Clinic() { Name = "Cleveland Clinic", Address = "2049 East 100th Street ", ImageUri="ClevelandClinic.jpg" },
+                new Clinic() { Name = "Hospital of St. Cross", Address = "St Cross Back St ", ImageUri="HospitalofStCross .jpg" },
+                new Clinic() { Name = "The American Hospital of Paris", Address = "63 Boulevard Victor Hugo ", ImageUri="AmericanHospital.jpg" }
             };
 
             clinics.ForEach(s => context.Clinics.AddOrUpdate(c => c.Id, s));
@@ -58,15 +59,15 @@
             var doctors = new List<Doctor>
                 {
                     new Doctor(){ FullName = "Benedict of Nursia" , Education = "Primary education", Sex = "Male", Speciality = "Cardiologists‎", RoomNumber = 221,
-                        DepartmentID = departments.Single(d=> d.Name == "Anaesthetics" && d.Clinic.Name == "The Pennsylvania Hospital" ).Id, ImagePath = "Doctor.png" },
+                        DepartmentID = departments.Single(d=> d.Name == "Anaesthetics" && d.Clinic.Name == "The Pennsylvania Hospital" ).Id, ImageUri = "Doctor.png" },
                     new Doctor(){ FullName = "Max Wilms" , Education = "Basic education", Sex = "Male", Speciality = "Diabetologists‎‎", RoomNumber = 107,
-                        DepartmentID = departments.Single(d=> d.Name == "Cardiology" && d.Clinic.Name == "The Pennsylvania Hospital" ).Id, ImagePath = "Doctor.png"},
+                        DepartmentID = departments.Single(d=> d.Name == "Cardiology" && d.Clinic.Name == "The Pennsylvania Hospital" ).Id, ImageUri = "Doctor.png"},
                     new Doctor(){ FullName = "John Bodkin Adams" , Education = "Upper secondary education", Sex = "Male", Speciality = "Psychiatrists‎‎‎", RoomNumber = 102,
-                        DepartmentID = departments.Single(d=> d.Name == "Anaesthetics" && d.Clinic.Name == "The Pennsylvania Hospital" ).Id, ImagePath = "Doctor.png"},
+                        DepartmentID = departments.Single(d=> d.Name == "Anaesthetics" && d.Clinic.Name == "The Pennsylvania Hospital" ).Id, ImageUri = "Doctor.png"},
                     new Doctor(){ FullName = "Mikhail Bulgakov" , Education = "Primary education", Sex = "Male", Speciality = "Gynaecologists‎", RoomNumber = 87,
-                        DepartmentID = departments.Single(d=> d.Name == "Gynaecology" && d.Clinic.Name == "The Pennsylvania Hospital" ).Id, ImagePath = "Doctor.png"},
+                        DepartmentID = departments.Single(d=> d.Name == "Gynaecology" && d.Clinic.Name == "The Pennsylvania Hospital" ).Id, ImageUri = "Doctor.png"},
                     new Doctor(){ FullName = "Bob Brown" , Education = "Basic education", Sex = "Male", Speciality = "Emergency physicians‎‎", RoomNumber = 12,
-                        DepartmentID = departments.Single(d=> d.Name == "Critical care" && d.Clinic.Name == "The Pennsylvania Hospital" ).Id, ImagePath = "Doctor.png"}
+                        DepartmentID = departments.Single(d=> d.Name == "Critical care" && d.Clinic.Name == "The Pennsylvania Hospital" ).Id, ImageUri = "Doctor.png"}
                 };
 
             doctors.ForEach(d => context.Doctors.AddOrUpdate(p => p.Id, d));
@@ -86,19 +87,19 @@
             var patients = new List<Patient>
                 {
                     new Patient(){ FullName = "George A. Grantham", Address = "2124 Atha Drive", DateOfBirth= DateTime.Parse("March 6, 1996"), Phone = "661-762-9592", Sex = "Male",
-                        ImagePath = "DefaulImageForPatient.jpg"},
+                        ImageUri = "DefaulImageForPatient.jpg"},
                     new Patient(){ FullName = "Jeffrey S. Morgan", Address = "3793 James Street", DateOfBirth= DateTime.Parse("May 25, 1973"), Phone = "585-593-7478", Sex = "Male",
-                        ImagePath = "DefaulImageForPatient.jpg"},
+                        ImageUri = "DefaulImageForPatient.jpg"},
                     new Patient(){ FullName = "Brian L. Bower", Address = "1718 Goldleaf Lane", DateOfBirth= DateTime.Parse("March 11, 1965"), Phone = "201-585-5032", Sex = "Male",
-                        ImagePath = "DefaulImageForPatient.jpg"},
+                        ImageUri = "DefaulImageForPatient.jpg"},
                     new Patient(){ FullName = "Marjorie S. Lombard", Address = "2950 Hall Valley Drive", DateOfBirth= DateTime.Parse("January 7, 1948"), Phone = "304-639-8050", Sex = "Female",
-                        ImagePath = "DefaulImageForPatient.jpg"},
+                        ImageUri = "DefaulImageForPatient.jpg"},
                     new Patient(){ FullName = "Lynn J. Larson", Address = "1012 Buck Drive", DateOfBirth= DateTime.Parse("April 1, 1984"), Phone = "802-221-2858", Sex = "Female",
-                        ImagePath = "DefaulImageForPatient.jpg"},
+                        ImageUri = "DefaulImageForPatient.jpg"},
                     new Patient(){ FullName = "Marva R. Orr", Address = "1259 River Road", DateOfBirth= DateTime.Parse("March 10, 1967"), Phone = "719-503-7851", Sex = "Female",
-                        ImagePath = "DefaulImageForPatient.jpg"},
+                        ImageUri = "DefaulImageForPatient.jpg"},
                     new Patient(){ FullName = "Vivian J. Mott", Address = "963 Washington Street", DateOfBirth= DateTime.Parse("April 19, 1985"), Phone = "361-439-5374", Sex = "Female",
-                        ImagePath = "DefaulImageForPatient.jpg"},
+                        ImageUri = "DefaulImageForPatient.jpg"},
                 };
 
             patients.ForEach(p => context.Patients.AddOrUpdate(d => d.Id, p));

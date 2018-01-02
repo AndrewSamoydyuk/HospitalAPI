@@ -13,7 +13,7 @@ namespace HospitalAPI.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201801011738094_init"; }
+            get { return "201801021416213_init"; }
         }
         
         string IMigrationMetadata.Source
