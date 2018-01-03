@@ -75,10 +75,10 @@
 
             var schedules = new List<SchedulePerDay>
                 {
-                    new SchedulePerDay(){ TimeStart = TimeSpan.Parse("7:30"), TimeEnd = TimeSpan.Parse("15:30"), DoctorID = doctors.Single(d=>d.FullName=="Benedict of Nursia").Id, DayOfWeek = Models.DayOfWeek.Monday},
-                    new SchedulePerDay(){ TimeStart = TimeSpan.Parse("8:00"), TimeEnd = TimeSpan.Parse("16:30"), DoctorID = doctors.Single(d=>d.FullName=="Benedict of Nursia").Id, DayOfWeek = Models.DayOfWeek.Wednesday},
-                    new SchedulePerDay(){ TimeStart = TimeSpan.Parse("10:00"), TimeEnd = TimeSpan.Parse("17:00"), DoctorID = doctors.Single(d=>d.FullName=="Benedict of Nursia").Id,DayOfWeek = Models.DayOfWeek.Sunday},
-                    new SchedulePerDay(){ TimeStart = TimeSpan.Parse("8:30"), TimeEnd = TimeSpan.Parse("13:30"), DoctorID = doctors.Single(d=>d.FullName=="Max Wilms").Id, DayOfWeek = Models.DayOfWeek.Tuesday},
+                    new SchedulePerDay(){ TimeStart = TimeSpan.Parse("7:30"), TimeEnd = TimeSpan.Parse("15:30"), DoctorID = doctors.Single(d=>d.FullName=="Benedict of Nursia").Id, DayNumber = DayNumber.Monday},
+                    new SchedulePerDay(){ TimeStart = TimeSpan.Parse("8:00"), TimeEnd = TimeSpan.Parse("16:30"), DoctorID = doctors.Single(d=>d.FullName=="Benedict of Nursia").Id, DayNumber = DayNumber.Wednesday},
+                    new SchedulePerDay(){ TimeStart = TimeSpan.Parse("10:00"), TimeEnd = TimeSpan.Parse("17:00"), DoctorID = doctors.Single(d=>d.FullName=="Benedict of Nursia").Id,DayNumber = DayNumber.Sunday},
+                    new SchedulePerDay(){ TimeStart = TimeSpan.Parse("8:30"), TimeEnd = TimeSpan.Parse("13:30"), DoctorID = doctors.Single(d=>d.FullName=="Max Wilms").Id, DayNumber = DayNumber.Tuesday},
                 };
 
             schedules.ForEach(s => context.Schedule.AddOrUpdate(c => c.Id, s));
@@ -142,7 +142,8 @@
             medications.ForEach(m => context.Medications.AddOrUpdate(d => d.Id, m));
             context.SaveChanges();
 
-            context.PatientVisitMedication.AddOrUpdate(
+            var patientVisitMedication = new List<PatientVisitMedication> {
+
                 new PatientVisitMedication() { CountOfDays = 10, MedicationID = medications.Single(m => m.Name == "Halcion").Id, PatientVisitID = patientVisits.Single(v => v.Id == 1).Id },
                 new PatientVisitMedication() { CountOfDays = 13, MedicationID = medications.Single(m => m.Name == "Butrans").Id, PatientVisitID = patientVisits.Single(v => v.Id == 1).Id },
                 new PatientVisitMedication() { CountOfDays = 30, MedicationID = medications.Single(m => m.Name == "Acarbose").Id, PatientVisitID = patientVisits.Single(v => v.Id == 1).Id },
@@ -153,7 +154,9 @@
                 new PatientVisitMedication() { CountOfDays = 12, MedicationID = medications.Single(m => m.Name == "Paraplatin").Id, PatientVisitID = patientVisits.Single(v => v.Id == 5).Id },
                 new PatientVisitMedication() { CountOfDays = 17, MedicationID = medications.Single(m => m.Name == "Abacavir Sulfate").Id, PatientVisitID = patientVisits.Single(v => v.Id == 5).Id },
                 new PatientVisitMedication() { CountOfDays = 10, MedicationID = medications.Single(m => m.Name == "Halcion").Id, PatientVisitID = patientVisits.Single(v => v.Id == 5).Id }
-            );
+            };
+
+            patientVisitMedication.ForEach(pv => context.PatientVisitMedication.AddOrUpdate(v => v.MedicationID, pv));
             context.SaveChanges();
 
         }

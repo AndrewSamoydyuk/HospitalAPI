@@ -26,12 +26,14 @@ namespace HospitalAPI.Controllers
         }
 
         // GET api/medications
+        [HttpGet]
         public IEnumerable<MedicationDTO> GetMedications()
         {
             return medicationRepository.GetMedications();
         }
 
         //GET api/medications/1
+        [HttpGet]
         [ResponseType(typeof(MedicationDTO))]
         public IHttpActionResult GetMedication(int id)
         {
@@ -46,6 +48,7 @@ namespace HospitalAPI.Controllers
         }
 
         //POST api/medication
+        [HttpPost]
         [ResponseType(typeof(Medication))]
         public IHttpActionResult PostMedication([FromBody]Medication medication)
         {
@@ -62,6 +65,7 @@ namespace HospitalAPI.Controllers
             }
         }
 
+        [HttpDelete]
         [ResponseType(typeof(Medication))]
         public IHttpActionResult DeleteMedication(int id)
         {

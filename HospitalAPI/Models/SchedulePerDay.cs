@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace HospitalAPI.Models
 {
@@ -21,18 +22,18 @@ namespace HospitalAPI.Models
         public Doctor Doctor { get; set; }
 
         [Required]
-        public DayOfWeek DayOfWeek { get; set; }
+        public DayNumber DayNumber { get; set; }
 
     }
 
-    public enum DayOfWeek
+    public enum DayNumber
     {
         Monday = 1,
-        Tuesday,
-        Wednesday,
-        Thursday,
-        Friday,
-        Saturday,
-        Sunday
+        Tuesday = 2,
+        Wednesday = 3,
+        Thursday = 4,
+        Friday = 5,
+        Saturday = 6,
+        Sunday = 7
     }
 }

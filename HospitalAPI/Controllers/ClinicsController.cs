@@ -27,12 +27,14 @@ namespace HospitalAPI.Controllers
         }
 
         // GET api/Clinics
+        [HttpGet]
         public IEnumerable<ClinicDTO> GetClinics()
         {
             return clinicRepository.GetClinics();
         }
 
         // GET api/Clinics/1
+        [HttpGet]
         [ResponseType(typeof(ClinicDetailDTO))]
         public IHttpActionResult GetClinic(int id)
         {
@@ -47,8 +49,9 @@ namespace HospitalAPI.Controllers
         }
 
         // PUT api/Clinic/1
+        [HttpPut]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutClinic(int id, Clinic clinic)
+        public IHttpActionResult PutClinic(int id, [FromBody]Clinic clinic)
         {
             if (!ModelState.IsValid)
             {
@@ -66,8 +69,9 @@ namespace HospitalAPI.Controllers
         }
 
         // POST api/Clinics
+        [HttpPost]
         [ResponseType(typeof(ClinicDTO))]
-        public IHttpActionResult PostClinic(Clinic clinic)
+        public IHttpActionResult PostClinic([FromBody]Clinic clinic)
         {
             if (!ModelState.IsValid)
             {
@@ -105,8 +109,9 @@ namespace HospitalAPI.Controllers
             return Ok(clinic);
         }
 
+        [HttpPost]
         [Route("~/api/clinics/addDepartment")]
-        public IHttpActionResult PostDepartment(Department department)
+        public IHttpActionResult PostDepartment([FromBody]Department department)
         {
             if (!ModelState.IsValid)
             {

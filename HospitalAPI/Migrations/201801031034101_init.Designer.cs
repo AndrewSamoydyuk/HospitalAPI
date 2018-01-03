@@ -7,13 +7,13 @@ namespace HospitalAPI.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class deleteProcedure : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(deleteProcedure));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201801022027066_deleteProcedure"; }
+            get { return "201801031034101_init"; }
         }
         
         string IMigrationMetadata.Source
