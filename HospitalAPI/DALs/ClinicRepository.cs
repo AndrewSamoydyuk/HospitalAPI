@@ -17,12 +17,6 @@ namespace HospitalAPI.DALs
             this.db = context;
         }
 
-        private static readonly Expression<Func<Department, DepartmentDTO>> AsDepartmentDto = x => new DepartmentDTO
-        {
-            Id = x.Id,
-            Name = x.Name
-        };
-
         public IEnumerable<ClinicDTO> GetClinics()
         {
             var clinics = from c in db.Clinics
@@ -39,7 +33,7 @@ namespace HospitalAPI.DALs
 
         public ClinicDetailDTO ClinicDetails(int id)
         {
-            var clinic = (from c in db.Clinics
+            var clinic = (from c in db.Clinics.Include(cl=>cl.Departments)
                           where c.Id == id
                           select new ClinicDetailDTO
                           {
@@ -47,8 +41,13 @@ namespace HospitalAPI.DALs
                               Name = c.Name,
                               Address = c.Address,
                               ImageUri = c.ImageUri,
-                              Departments = db.Departments.Where(d=>d.ClinicID == id).Select(AsDepartmentDto).ToList(),
-                              CountOfDepartments = db.Departments.Where(d => d.ClinicID == id).Count()
+                              Departments = from d in c.Departments
+                                            select new DepartmentDTO
+                                            {
+                                                Id = d.Id,
+                                                Name = d.Name
+                                            },
+                              CountOfDepartments = c.Departments.Count()
 
                           }).SingleOrDefault();
 

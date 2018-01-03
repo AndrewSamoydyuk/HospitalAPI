@@ -23,6 +23,6 @@ namespace HospitalAPI.DTOs
 
         public DepartmentDTO Department { get; set; }
 
-        public List<ScheduleDTO> Schedule { get; set; }
+        public IEnumerable<ScheduleDTO> Schedule { get; set; }
     }
 }

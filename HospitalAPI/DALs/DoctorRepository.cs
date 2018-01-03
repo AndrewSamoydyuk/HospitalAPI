@@ -5,7 +5,6 @@ using System.Web;
 using HospitalAPI.DTOs;
 using HospitalAPI.Models;
 using System.Data.Entity;
-using System.Linq.Expressions;
 
 namespace HospitalAPI.DALs
 {
@@ -17,20 +16,6 @@ namespace HospitalAPI.DALs
         {
             this.db = context;
         }
-
-        private static readonly Expression<Func<Department, DepartmentDTO>> AsDepartmentDto = x => new DepartmentDTO
-        {
-            Id = x.Id,
-            Name = x.Name
-        };
-
-        private static readonly Expression<Func<SchedulePerDay, ScheduleDTO>> AsScheduleDto = x => new ScheduleDTO
-        {
-            Id = x.Id,
-            TimeStart = x.TimeStart.ToString().Substring(0,5),
-            TimeEnd = x.TimeEnd.ToString().Substring(0, 5),
-            DayNumber = x.DayNumber
-        };
 
         public IEnumerable<DoctorDTO> GetDoctors()
         {
@@ -47,7 +32,7 @@ namespace HospitalAPI.DALs
 
         public DoctorDetailDTO DoctorDetails(int id)
         {
-            var doctor = (from d in db.Doctors
+            var doctor = (from d in db.Doctors.Include(doc=>doc.Department).Include(doc=>doc.Schedule)
                           select new DoctorDetailDTO
                           {
                               Id = d.Id,
@@ -57,8 +42,19 @@ namespace HospitalAPI.DALs
                               Speciality = d.Speciality,
                               ImageUri = d.ImageUri,
                               RoomNumber = d.RoomNumber,
-                              Department = db.Departments.Select(AsDepartmentDto).FirstOrDefault(dep => dep.Id == d.DepartmentID),
-                              Schedule = db.Schedule.Where(s=>s.DoctorID == d.Id).Select(AsScheduleDto).ToList()
+                              Department = new DepartmentDTO
+                              {
+                                  Id = d.Department.Id,
+                                  Name = d.Department.Name
+                              },
+                              Schedule = from s in d.Schedule
+                                         select new ScheduleDTO
+                                         {
+                                             Id = s.Id,
+                                             TimeStart = s.TimeStart.ToString().Substring(0, 5),
+                                             TimeEnd = s.TimeEnd.ToString().Substring(0, 5),
+                                             DayNumber = s.DayNumber
+                                         }
                               
                           }).SingleOrDefault(d=>d.Id == id);
 

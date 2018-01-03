@@ -17,6 +17,6 @@ namespace HospitalAPI.DTOs
 
         public int CountOfDepartments { get; set; }
 
-        public List<DepartmentDTO> Departments { get; set; }
+        public IEnumerable<DepartmentDTO> Departments { get; set; }
     }
 }
