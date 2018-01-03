@@ -124,6 +124,5 @@ namespace HospitalAPI.Controllers
             return StatusCode(HttpStatusCode.Created);
 
         }
-
     }
 }

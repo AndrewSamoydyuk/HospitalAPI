@@ -186,19 +186,25 @@
     <Compile Include="Controllers\DoctorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MedicationsController.cs" />
+    <Compile Include="Controllers\PatientsController.cs" />
     <Compile Include="DALs\ClinicRepository.cs" />
     <Compile Include="DALs\DoctorRepository.cs" />
     <Compile Include="DALs\IClinicRepository.cs" />
     <Compile Include="DALs\IDoctorRepository.cs" />
     <Compile Include="DALs\IMedicationRepository.cs" />
+    <Compile Include="DALs\IPatientRepository.cs" />
     <Compile Include="DALs\MedicationRepository.cs" />
+    <Compile Include="DALs\PatientRepository.cs" />
     <Compile Include="DTOs\ClinicDetailDTO.cs" />
     <Compile Include="DTOs\ClinicDTO.cs" />
     <Compile Include="DTOs\DepartmentDTO.cs" />
     <Compile Include="DTOs\DoctorDetailDTO.cs" />
     <Compile Include="DTOs\DoctorDTO.cs" />
     <Compile Include="DTOs\MedicationDTO.cs" />
+    <Compile Include="DTOs\PatientDetailsDTO.cs" />
+    <Compile Include="DTOs\PatientDTO.cs" />
     <Compile Include="DTOs\ScheduleDTO.cs" />
+    <Compile Include="DTOs\VisitDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

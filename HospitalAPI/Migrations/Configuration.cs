@@ -142,22 +142,22 @@
             medications.ForEach(m => context.Medications.AddOrUpdate(d => d.Id, m));
             context.SaveChanges();
 
-            var patientVisitMedication = new List<PatientVisitMedication> {
+            //var patientVisitMedication = new List<PatientVisitMedication> {
 
-                new PatientVisitMedication() { CountOfDays = 10, MedicationID = medications.Single(m => m.Name == "Halcion").Id, PatientVisitID = patientVisits.Single(v => v.Id == 1).Id },
-                new PatientVisitMedication() { CountOfDays = 13, MedicationID = medications.Single(m => m.Name == "Butrans").Id, PatientVisitID = patientVisits.Single(v => v.Id == 1).Id },
-                new PatientVisitMedication() { CountOfDays = 30, MedicationID = medications.Single(m => m.Name == "Acarbose").Id, PatientVisitID = patientVisits.Single(v => v.Id == 1).Id },
-                new PatientVisitMedication() { CountOfDays = 3, MedicationID = medications.Single(m => m.Name == "Abacavir Sulfate").Id, PatientVisitID = patientVisits.Single(v => v.Id == 2).Id },
-                new PatientVisitMedication() { CountOfDays = 4, MedicationID = medications.Single(m => m.Name == "Acarbose").Id, PatientVisitID = patientVisits.Single(v => v.Id == 3).Id },
-                new PatientVisitMedication() { CountOfDays = 5, MedicationID = medications.Single(m => m.Name == "Baraclude").Id, PatientVisitID = patientVisits.Single(v => v.Id == 4).Id },
-                new PatientVisitMedication() { CountOfDays = 7, MedicationID = medications.Single(m => m.Name == "Halcion").Id, PatientVisitID = patientVisits.Single(v => v.Id == 4).Id },
-                new PatientVisitMedication() { CountOfDays = 12, MedicationID = medications.Single(m => m.Name == "Paraplatin").Id, PatientVisitID = patientVisits.Single(v => v.Id == 5).Id },
-                new PatientVisitMedication() { CountOfDays = 17, MedicationID = medications.Single(m => m.Name == "Abacavir Sulfate").Id, PatientVisitID = patientVisits.Single(v => v.Id == 5).Id },
-                new PatientVisitMedication() { CountOfDays = 10, MedicationID = medications.Single(m => m.Name == "Halcion").Id, PatientVisitID = patientVisits.Single(v => v.Id == 5).Id }
-            };
+            //    new PatientVisitMedication() { CountOfDays = 10, MedicationID = medications.Single(m => m.Name == "Halcion").Id, PatientVisitID = patientVisits.Single(v => v.Id == 1).Id },
+            //    new PatientVisitMedication() { CountOfDays = 13, MedicationID = medications.Single(m => m.Name == "Butrans").Id, PatientVisitID = patientVisits.Single(v => v.Id == 1).Id },
+            //    new PatientVisitMedication() { CountOfDays = 30, MedicationID = medications.Single(m => m.Name == "Acarbose").Id, PatientVisitID = patientVisits.Single(v => v.Id == 1).Id },
+            //    new PatientVisitMedication() { CountOfDays = 3, MedicationID = medications.Single(m => m.Name == "Abacavir Sulfate").Id, PatientVisitID = patientVisits.Single(v => v.Id == 2).Id },
+            //    new PatientVisitMedication() { CountOfDays = 4, MedicationID = medications.Single(m => m.Name == "Acarbose").Id, PatientVisitID = patientVisits.Single(v => v.Id == 3).Id },
+            //    new PatientVisitMedication() { CountOfDays = 5, MedicationID = medications.Single(m => m.Name == "Baraclude").Id, PatientVisitID = patientVisits.Single(v => v.Id == 4).Id },
+            //    new PatientVisitMedication() { CountOfDays = 7, MedicationID = medications.Single(m => m.Name == "Halcion").Id, PatientVisitID = patientVisits.Single(v => v.Id == 4).Id },
+            //    new PatientVisitMedication() { CountOfDays = 12, MedicationID = medications.Single(m => m.Name == "Paraplatin").Id, PatientVisitID = patientVisits.Single(v => v.Id == 5).Id },
+            //    new PatientVisitMedication() { CountOfDays = 17, MedicationID = medications.Single(m => m.Name == "Abacavir Sulfate").Id, PatientVisitID = patientVisits.Single(v => v.Id == 5).Id },
+            //    new PatientVisitMedication() { CountOfDays = 10, MedicationID = medications.Single(m => m.Name == "Halcion").Id, PatientVisitID = patientVisits.Single(v => v.Id == 5).Id }
+            //};
 
-            patientVisitMedication.ForEach(pv => context.PatientVisitMedication.AddOrUpdate(v => v.MedicationID, pv));
-            context.SaveChanges();
+            //patientVisitMedication.ForEach(pv => context.PatientVisitMedication.AddOrUpdate(v => v.MedicationID, pv));
+            //context.SaveChanges();
 
         }
     }

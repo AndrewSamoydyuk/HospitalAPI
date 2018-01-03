@@ -29,8 +29,8 @@ namespace HospitalAPI.Models
 
     public enum Status
     {
-        Cured,
-        OnTreatment,
-        NotCured
+        Cured = 1,
+        OnTreatment = 2,
+        NotCured = 3
     }
 }
