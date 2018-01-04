@@ -17,5 +17,7 @@ namespace HospitalAPI.DTOs
         public string DoctorName { get; set; }
 
         public Status Status { get; set; } 
+
+        public IEnumerable<VisitMedicationDTO> Medications { get; set; }
     }
 }

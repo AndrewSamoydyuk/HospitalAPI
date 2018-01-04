@@ -65,6 +65,63 @@ namespace HospitalAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        //PUT api/patients/visitId/changeStatus
+        [HttpPut]
+        [Route("~/api/patients/{visitId:int}/changeStatus")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult ChangeStatus(int visitId, [FromBody]Status status)
+        {
+            var visit = patientRepository.GetVisitById(visitId);
+            if (visit == null)
+            {
+                return NotFound();
+            }
+
+            visit.Status = status;
+            patientRepository.UpdateVisitStatus(visit);
+            patientRepository.Save();
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        //POST api/patients/id/addvisit
+        [HttpPost]
+        [Route("~/api/patients/{id:int}/addvisit")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult AddVisit(int id,[FromBody]PatientVisit visit)
+        {
+            var patient = patientRepository.GetPatientById(id);
+            if (patient == null)
+            {
+                return NotFound();
+            }
+
+            visit.PatientID = patient.Id;
+            visit.Status = Status.OnTreatment;
+            patientRepository.AddVisit(visit);
+            patientRepository.Save();
+
+            return StatusCode(HttpStatusCode.Created);
+        }
+
+        // POST api/patients/visitId/addMedication
+        [Route("~/api/patients/{visitId:int}/addMedication")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult AddMedication(int visitId, [FromBody] PatientVisitMedication medication)
+        {
+            var visit = patientRepository.GetVisitById(visitId);
+            if (visit == null)
+            {
+                return NotFound();
+            };
+
+            medication.PatientVisitID = visitId;
+            patientRepository.AddMedication(medication);
+            patientRepository.Save();
+
+            return StatusCode(HttpStatusCode.Created);
+        }
+
         // POST api/patients
         [HttpPost]
         [ResponseType(typeof(PatientDTO))]

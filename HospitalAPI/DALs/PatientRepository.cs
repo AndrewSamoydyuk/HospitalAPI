@@ -20,13 +20,19 @@ namespace HospitalAPI.DALs
         public IEnumerable<PatientDTO> GetPatients()
         {
             var patients = from p in db.Patients
-                          select new PatientDTO
-                          {
+                           select new PatientDTO
+                           {
                                id = p.Id,
                                FullName = p.FullName,
-                               Address = p.Address                              
-                          };
+                               Address = p.Address
+                           };
+
             return patients;
+        }
+
+        public PatientVisit GetVisitById(int id)
+        {
+            return db.PatientVisits.Find(id);
         }
 
         public PatientDetailsDTO GetPatientDetails(int id)
@@ -34,22 +40,29 @@ namespace HospitalAPI.DALs
             var patient = (from p in db.Patients.Include(pat => pat.Visits)
                            select new PatientDetailsDTO
                            {
-                                Id = p.Id,
-                                FullName = p.FullName,
-                                Address = p.Address,
-                                DateOfBirth = p.DateOfBirth,
-                                ImageUri = p.ImageUri,
-                                Phone = p.Phone,
-                                Sex = p.Sex,
-                                Visits = from visit in p.Visits
-                                         select new VisitDTO
-                                         {
-                                             Date = visit.Date,
-                                             Diagnosis = visit.Diagnosis,
-                                             DoctorName = visit.Doctor.FullName,
-                                             Id = visit.Id,
-                                             Status = visit.Status
-                                         }                               
+                               Id = p.Id,
+                               FullName = p.FullName,
+                               Address = p.Address,
+                               DateOfBirth = p.DateOfBirth,
+                               ImageUri = p.ImageUri,
+                               Phone = p.Phone,
+                               Sex = p.Sex,
+                               Visits = from visit in p.Visits
+                                        select new VisitDTO
+                                        {
+                                            Date = visit.Date,
+                                            Diagnosis = visit.Diagnosis,
+                                            DoctorName = visit.Doctor.FullName,
+                                            Id = visit.Id,
+                                            Status = visit.Status,
+                                            Medications = visit.Medications
+                                                        .Select(vs => new VisitMedicationDTO
+                                                        {
+                                                            CountOfDays = vs.CountOfDays,
+                                                            Id = vs.Medication.Id,
+                                                            Name = vs.Medication.Name
+                                                        })
+                                        }
                            }).FirstOrDefault(pat => pat.Id == id);
 
             return patient;
@@ -58,6 +71,21 @@ namespace HospitalAPI.DALs
         public Patient GetPatientById(int id)
         {
             return db.Patients.Find(id);
+        }
+
+        public void AddVisit(PatientVisit visit)
+        {
+            db.PatientVisits.Add(visit);
+        }
+
+        public void AddMedication(PatientVisitMedication medication)
+        {
+            db.PatientVisitMedication.Add(medication);
+        }
+
+        public void UpdateVisitStatus(PatientVisit visit)
+        {
+            db.Entry(visit).State = EntityState.Modified;
         }
 
         public void DeletePatient(Patient patient)

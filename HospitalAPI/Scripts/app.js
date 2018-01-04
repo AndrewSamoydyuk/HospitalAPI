@@ -34,3 +34,35 @@ function AddDepartment() {
         contentType: "application/json"
     });
 };
+
+function AddVisit() {
+    var visit = { Date: "February 14 2018", Diagnosis: "NewDiagnos", DoctorID: 4 };
+    $.ajax({
+        type: "POST",
+        data: JSON.stringify(visit),
+        url: "api/patients/3/addvisit",
+        contentType: "application/json"
+    });
+};
+
+function AddMedication() {
+    var medication = { CountOfDays: 7, MedicationID: 4 };
+    $.ajax({
+        type: "POST",
+        data: JSON.stringify(medication),
+        url: "api/patients/6/addMedication",
+        contentType: "application/json"
+    });
+};
+
+function ChangeStatus() {
+    var status = 1;
+    $.ajax({
+        type: "PUT",
+        data: JSON.stringify(status),
+        url: "api/patients/6/changeStatus",
+        contentType: "application/json"
+    });
+};
+
+
