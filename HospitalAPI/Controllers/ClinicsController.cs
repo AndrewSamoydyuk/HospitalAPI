@@ -81,7 +81,7 @@ namespace HospitalAPI.Controllers
             clinicRepository.AddClinic(clinic);
             clinicRepository.Save();
 
-            var ClinicDTO = new ClinicDTO()
+            var clinicDTO = new ClinicDTO()
             {
                 Id = clinic.Id,
                 Name = clinic.Name,
@@ -89,7 +89,7 @@ namespace HospitalAPI.Controllers
                 ImageUri = clinic.ImageUri
             };
 
-            return CreatedAtRoute("DefaultApi", new { id = clinic.Id }, ClinicDTO );
+            return CreatedAtRoute("DefaultApi", new { id = clinic.Id }, clinicDTO );
         }
 
         // DELETE api/clinics/1
