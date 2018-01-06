@@ -10,5 +10,7 @@ namespace HospitalAPI.DTOs
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public ResultOfTreatment ResultsOfTreatment { get; set; }
     }
 }

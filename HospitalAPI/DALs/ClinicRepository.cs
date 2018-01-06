@@ -4,11 +4,10 @@ using System.Data.Entity;
 using HospitalAPI.Models;
 using HospitalAPI.DTOs;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace HospitalAPI.DALs
 {
-    public class ClinicRepository: IClinicRepository
+    public class ClinicRepository : IClinicRepository
     {
         private HospitalContext db;
 
@@ -33,7 +32,7 @@ namespace HospitalAPI.DALs
 
         public ClinicDetailDTO ClinicDetails(int id)
         {
-            var clinic = (from c in db.Clinics.Include(cl=>cl.Departments)
+            var clinic = (from c in db.Clinics.Include(cl => cl.Departments)
                           where c.Id == id
                           select new ClinicDetailDTO
                           {
@@ -47,11 +46,38 @@ namespace HospitalAPI.DALs
                                                 Id = d.Id,
                                                 Name = d.Name
                                             },
-                              CountOfDepartments = c.Departments.Count()
+                              CountOfDepartments = c.Departments.Count(),
+                              CountOfDoctors = (from d in c.Departments
+                                                select d.Doctors.Count()).Sum()
+
 
                           }).SingleOrDefault();
 
+            clinic.Departments.ToList().ForEach(d => d.ResultsOfTreatment = GetResultOfTreatment(d.Id));
+
+
             return clinic;
+        }
+
+        private ResultOfTreatment GetResultOfTreatment(int depId)
+        {
+            var group = from r in db.PatientVisits.Include(v => v.Doctor)
+                        where r.Doctor.DepartmentID == depId
+                        group r by r.Status into res
+                        select new
+                        {
+                            Name = res.Key,
+                            Count = res.Count()
+                        };
+
+            ResultOfTreatment result = new ResultOfTreatment()
+            {
+                CountOfCured = group.SingleOrDefault(g => g.Name == Status.Cured)?.Count ?? 0,
+                CountOfNotCured = group.SingleOrDefault(g => g.Name == Status.NotCured)?.Count ?? 0,
+                CountOfOnTreatment = group.SingleOrDefault(g => g.Name == Status.OnTreatment)?.Count ?? 0
+            };
+
+            return result;
         }
 
         public Clinic GetClinicById(int id)
@@ -66,7 +92,7 @@ namespace HospitalAPI.DALs
 
         public void UpdateClinic(Clinic clinic)
         {
-            db.Entry(clinic).State = EntityState.Modified;  
+            db.Entry(clinic).State = EntityState.Modified;
         }
 
         public void AddClinic(Clinic clinic)

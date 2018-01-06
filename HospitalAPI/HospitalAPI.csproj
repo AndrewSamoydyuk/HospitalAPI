@@ -203,6 +203,7 @@
     <Compile Include="DTOs\MedicationDTO.cs" />
     <Compile Include="DTOs\PatientDetailsDTO.cs" />
     <Compile Include="DTOs\PatientDTO.cs" />
+    <Compile Include="DTOs\ResultOfTreatment.cs" />
     <Compile Include="DTOs\ScheduleDTO.cs" />
     <Compile Include="DTOs\VisitDTO.cs" />
     <Compile Include="DTOs\VisitMedicationDTO.cs" />
