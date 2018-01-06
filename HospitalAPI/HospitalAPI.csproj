@@ -201,7 +201,8 @@
     <Compile Include="DTOs\DoctorDetailDTO.cs" />
     <Compile Include="DTOs\DoctorDTO.cs" />
     <Compile Include="DTOs\MedicationDTO.cs" />
-    <Compile Include="DTOs\PatientDetailsDTO.cs" />
+    <Compile Include="DTOs\MedicatonDetailDTO.cs" />
+    <Compile Include="DTOs\PatientDetailDTO.cs" />
     <Compile Include="DTOs\PatientDTO.cs" />
     <Compile Include="DTOs\ResultOfTreatment.cs" />
     <Compile Include="DTOs\ScheduleDTO.cs" />

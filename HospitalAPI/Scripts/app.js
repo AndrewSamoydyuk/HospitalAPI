@@ -36,7 +36,7 @@ function AddDepartment() {
 };
 
 function AddVisit() {
-    var visit = { Date: "February 14 2018", Diagnosis: "NewDiagnos", DoctorID: 4 };
+    var visit = { Date: "January 30 2018", Diagnosis: "NewDiagnos", DoctorID: 4 };
     $.ajax({
         type: "POST",
         data: JSON.stringify(visit),
@@ -46,11 +46,11 @@ function AddVisit() {
 };
 
 function AddMedication() {
-    var medication = { CountOfDays: 7, MedicationID: 4 };
+    var medication = { CountOfDays: 7, MedicationID: 1 };
     $.ajax({
         type: "POST",
         data: JSON.stringify(medication),
-        url: "api/patients/6/addMedication",
+        url: "api/patients/9/addMedication",
         contentType: "application/json"
     });
 };

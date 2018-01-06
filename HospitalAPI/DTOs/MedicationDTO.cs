@@ -8,8 +8,6 @@ namespace HospitalAPI.DTOs
 
         public string Name { get; set; }
 
-        public string Description { get; set; }
-
         public int AveragePrice { get; set; }
     }
 }

@@ -35,10 +35,10 @@ namespace HospitalAPI.DALs
             return db.PatientVisits.Find(id);
         }
 
-        public PatientDetailsDTO GetPatientDetails(int id)
+        public PatientDetailDTO GetPatientDetails(int id)
         {
             var patient = (from p in db.Patients.Include(pat => pat.Visits)
-                           select new PatientDetailsDTO
+                           select new PatientDetailDTO
                            {
                                Id = p.Id,
                                FullName = p.FullName,

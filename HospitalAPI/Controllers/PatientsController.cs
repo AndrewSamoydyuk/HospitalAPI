@@ -34,7 +34,7 @@ namespace HospitalAPI.Controllers
 
         // GET api/patient/1
         [HttpGet]
-        [ResponseType(typeof(PatientDetailsDTO))]
+        [ResponseType(typeof(PatientDetailDTO))]
         public IHttpActionResult GetPatient(int id)
         {
             var patient = patientRepository.GetPatientDetails(id);

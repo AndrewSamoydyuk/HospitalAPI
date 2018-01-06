@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HospitalAPI.DTOs
 {
-    public class PatientDetailsDTO
+    public class PatientDetailDTO
     {
         public int Id { get; set; }
 

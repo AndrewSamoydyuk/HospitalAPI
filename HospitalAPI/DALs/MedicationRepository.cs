@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 
 namespace HospitalAPI.DALs
 {
-    public class MedicationRepository: IMedicationRepository
+    public class MedicationRepository : IMedicationRepository
     {
         private HospitalContext db;
 
@@ -22,21 +22,43 @@ namespace HospitalAPI.DALs
         {
             Id = x.Id,
             Name = x.Name,
-            AveragePrice = x.AveragePrice,
-            Description = x.Description            
+            AveragePrice = x.AveragePrice
         };
+
+        private static readonly Expression<Func<Medication, MedicatonDetailDTO>> AsMedicationDetailDto = x => new MedicatonDetailDTO
+        {
+            Id = x.Id,
+            Name = x.Name,
+            AveragePrice = x.AveragePrice,
+            Description = x.Description,
+            UsedTimes = x.PatientVisitMedication.Where(v => v.MedicationID == x.Id).Count(),
+
+        };
+
+        private int GetUsedTimes(int medicationId)
+        {
+            int countOfUsed = (from vm in db.PatientVisitMedication.Include(v => v.PatientVisit)
+                               where vm.MedicationID == medicationId
+                               where (vm.PatientVisit.Date.Year == DateTime.Now.Year)&&(vm.PatientVisit.Date.Month == DateTime.Now.Month)
+                               select vm).Count();
+
+            return countOfUsed;
+        }
 
         public IEnumerable<MedicationDTO> GetMedications()
         {
             return db.Medications.Select(AsMedicationDto);
         }
 
-        public MedicationDTO MedicationDetails(int id)
+        public MedicatonDetailDTO MedicationDetails(int id)
         {
-            return db.Medications.Select(AsMedicationDto).SingleOrDefault(m => m.Id == id);
+            var medication = db.Medications.Select(AsMedicationDetailDto).SingleOrDefault(m => m.Id == id);
+            medication.UsedInThisMonthTimes = GetUsedTimes(medication.Id);
+
+            return medication;
         }
 
-        public Medication GetMedicationById (int id)
+        public Medication GetMedicationById(int id)
         {
             return db.Medications.Find(id);
         }
