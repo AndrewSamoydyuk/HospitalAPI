@@ -11,6 +11,7 @@ namespace HospitalAPI.DALs
         Patient GetPatientById(int id);
         PatientDetailDTO GetPatientDetails(int id);
         PatientVisit GetVisitById(int id);
+        IEnumerable<VisitDTO> GetVisitsByDate(DateTime date);
         void AddVisit(PatientVisit visit);
         void AddMedication(PatientVisitMedication medication);
         void UpdateVisitStatus(PatientVisit visit);

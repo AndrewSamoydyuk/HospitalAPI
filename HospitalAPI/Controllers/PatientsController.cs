@@ -32,6 +32,14 @@ namespace HospitalAPI.Controllers
             return patientRepository.GetPatients();
         }
 
+        //GET api/patients/getVisitsByDate/date
+        [HttpGet]
+        [Route("~/api/patients/getVisitsByDate/{*date:datetime:regex(\\d{4}/\\d{2}/\\d{2})}")] // * - span several URI segments
+        public IEnumerable<VisitDTO> GetVisitsByDate(DateTime date)
+        {
+            return patientRepository.GetVisitsByDate(date);
+        }
+
         // GET api/patient/1
         [HttpGet]
         [ResponseType(typeof(PatientDetailDTO))]

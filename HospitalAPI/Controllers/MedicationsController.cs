@@ -65,6 +65,7 @@ namespace HospitalAPI.Controllers
             }
         }
 
+        // DELETE api/medications/1
         [HttpDelete]
         [ResponseType(typeof(Medication))]
         public IHttpActionResult DeleteMedication(int id)

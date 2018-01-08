@@ -30,6 +30,29 @@ namespace HospitalAPI.DALs
             return patients;
         }
 
+        public IEnumerable<VisitDTO> GetVisitsByDate(DateTime date)
+        {
+            var visits = from visit in db.PatientVisits
+                         where DbFunctions.TruncateTime(visit.Date) == DbFunctions.TruncateTime(date)
+                         select new VisitDTO
+                         {
+                             Date = visit.Date,
+                             Diagnosis = visit.Diagnosis,
+                             DoctorName = visit.Doctor.FullName,
+                             Id = visit.Id,
+                             Status = visit.Status,
+                             Medications = visit.Medications
+                                         .Select(vs => new VisitMedicationDTO
+                                         {
+                                             CountOfDays = vs.CountOfDays,
+                                             Id = vs.Medication.Id,
+                                             Name = vs.Medication.Name
+                                         })
+                         };
+
+            return visits;
+        }
+
         public PatientVisit GetVisitById(int id)
         {
             return db.PatientVisits.Find(id);

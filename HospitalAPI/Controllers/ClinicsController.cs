@@ -109,6 +109,8 @@ namespace HospitalAPI.Controllers
             return Ok(clinic);
         }
 
+
+        //POST api/clinics/addDepartment
         [HttpPost]
         [Route("~/api/clinics/addDepartment")]
         public IHttpActionResult PostDepartment([FromBody]Department department)
