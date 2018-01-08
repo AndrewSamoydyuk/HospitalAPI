@@ -32,6 +32,14 @@ namespace HospitalAPI.Controllers
             return doctorRepository.GetDoctors();
         }
 
+        [HttpGet]
+        [Route("~/api/doctors/getByWorkDay/{day}")]
+        public IEnumerable<DoctorDTO> GetByWorkDay(string day)
+        {
+            return doctorRepository.GetDoctorsByWorkDay(day);
+            
+        }
+
         //GET api/doctors/1
         [HttpGet]
         [ResponseType(typeof(DoctorDetailDTO))]

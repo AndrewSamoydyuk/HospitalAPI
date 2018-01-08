@@ -21,6 +21,8 @@ namespace HospitalAPI.DTOs
 
         public int RoomNumber { get; set; }
 
+        public int CountOfPatients { get; set; }
+
         public DepartmentDTO Department { get; set; }
 
         public IEnumerable<ScheduleDTO> Schedule { get; set; }

@@ -11,6 +11,7 @@ namespace HospitalAPI.DALs
     public interface IDoctorRepository : IDisposable
     {
         IEnumerable<DoctorDTO> GetDoctors();
+        IEnumerable<DoctorDTO> GetDoctorsByWorkDay(string day);
         Doctor GetDoctorById(int id);
         DoctorDetailDTO DoctorDetails(int id);
         void DeleteDoctor(Doctor doctor);

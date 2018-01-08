@@ -30,9 +30,24 @@ namespace HospitalAPI.DALs
             return doctors;
         }
 
+        public IEnumerable<DoctorDTO> GetDoctorsByWorkDay (string day)
+        {
+            var doctors = from d in db.Doctors.Include(doc => doc.Schedule)
+                          where d.Schedule.Where(sh => sh.DayNumber.ToString() == day).Count() != 0
+                          select new DoctorDTO
+                          {
+                              Id = d.Id,
+                              FullName = d.FullName,
+                              Speciality = d.Speciality
+                          };
+
+            return doctors;
+
+        }
+
         public DoctorDetailDTO DoctorDetails(int id)
         {
-            var doctor = (from d in db.Doctors.Include(doc=>doc.Department).Include(doc=>doc.Schedule)
+            var doctor = (from d in db.Doctors.Include(doc=>doc.Department).Include(doc=>doc.Schedule).Include(doc=>doc.Patients)
                           select new DoctorDetailDTO
                           {
                               Id = d.Id,
@@ -42,6 +57,7 @@ namespace HospitalAPI.DALs
                               Speciality = d.Speciality,
                               ImageUri = d.ImageUri,
                               RoomNumber = d.RoomNumber,
+                              CountOfPatients = d.Patients.Where(p=>p.Status == Status.OnTreatment).ToList().Count,
                               Department = new DepartmentDTO
                               {
                                   Id = d.Department.Id,
