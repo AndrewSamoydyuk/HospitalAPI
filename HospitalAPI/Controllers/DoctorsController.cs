@@ -8,6 +8,7 @@ using HospitalAPI.Models;
 using HospitalAPI.DALs;
 using HospitalAPI.DTOs;
 using System.Web.Http.Description;
+using System.Threading.Tasks;
 
 namespace HospitalAPI.Controllers
 {
@@ -97,6 +98,51 @@ namespace HospitalAPI.Controllers
             };
 
             return CreatedAtRoute("DefaultAPI", new { id = doctor.Id }, DoctorDTO);
+        }
+
+
+        //POST api/doctors/1/addImage
+        [ResponseType(typeof(void))]
+        [HttpPost]
+        [Route("~/api/doctors/{id:int}/updateImage")]
+        public async Task<IHttpActionResult> UpdateImage(int id)
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                return BadRequest();
+            }
+
+            var doctor = doctorRepository.GetDoctorById(id);
+
+            if (doctor == null)
+            {
+                return NotFound();
+            }
+
+            if (System.IO.File.Exists(System.Web.HttpContext.Current.Server.MapPath("~/Content/Images/" + doctor.ImageUri)))
+            {
+                System.IO.File.Delete(System.Web.HttpContext.Current.Server.MapPath("~/Content/Images/" + doctor.ImageUri));
+            }
+
+            var provider = new MultipartMemoryStreamProvider();
+            string root = System.Web.HttpContext.Current.Server.MapPath("~/Content/Images/");
+            await Request.Content.ReadAsMultipartAsync(provider);
+
+            foreach (var file in provider.Contents)
+            {
+                var filename = file.Headers.ContentDisposition.FileName.Trim('\"');
+                byte[] fileArray = await file.ReadAsByteArrayAsync();
+
+                using (System.IO.FileStream fs = new System.IO.FileStream(root + filename, System.IO.FileMode.Create))
+                {
+                    await fs.WriteAsync(fileArray, 0, fileArray.Length);
+                }
+                doctor.ImageUri = "~/Content/Images/" + filename;
+            }
+            doctorRepository.UpdateDoctor(doctor);
+            doctorRepository.Save();
+
+            return Ok();
         }
 
         // DELETE api/doctors/1

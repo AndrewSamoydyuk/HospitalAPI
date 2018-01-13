@@ -1,4 +1,24 @@
-﻿function AddClinic(){
+﻿function AddImage() {
+    var files = document.getElementById('uploadFile').files;
+    if (files.length > 0) {
+        if (window.FormData !== undefined) {
+            var data = new FormData();
+            for (var x = 0; x < files.length; x++) {
+                data.append("file" + x, files[x]);
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "api/Clinics/2/updateImage",
+                contentType: false,
+                processData: false,
+                data: data
+            });
+        } 
+    }
+};
+
+function AddClinic() {
     var clinic = { Name: "NewName", Address: "newAddress", ImageUri: "Url" };
     $.ajax({
         type: "POST",

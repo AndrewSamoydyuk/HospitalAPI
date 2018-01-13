@@ -9,6 +9,7 @@ using HospitalAPI.Models;
 using System.Web.Http.Description;
 using HospitalAPI.DTOs;
 using System.Data.Entity.Infrastructure;
+using System.Threading.Tasks;
 
 namespace HospitalAPI.Controllers
 {
@@ -91,6 +92,52 @@ namespace HospitalAPI.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = clinic.Id }, clinicDTO );
         }
+
+
+        //POST api/clinics/1/addImage
+        [ResponseType(typeof(void))]
+        [HttpPost]
+        [Route("~/api/clinics/{id:int}/updateImage")]
+        public async Task<IHttpActionResult> UpdateImage(int id)
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                return BadRequest();
+            }
+
+            var clinic = clinicRepository.GetClinicById(id);
+
+            if (clinic == null)
+            {
+                return NotFound();
+            }
+
+            if (System.IO.File.Exists(System.Web.HttpContext.Current.Server.MapPath("~/Content/Images/" + clinic.ImageUri)))
+            {
+                System.IO.File.Delete(System.Web.HttpContext.Current.Server.MapPath("~/Content/Images/" + clinic.ImageUri));
+            }
+
+            var provider = new MultipartMemoryStreamProvider();
+            string root = System.Web.HttpContext.Current.Server.MapPath("~/Content/Images/");
+            await Request.Content.ReadAsMultipartAsync(provider);
+
+            foreach (var file in provider.Contents)
+            {
+                var filename = file.Headers.ContentDisposition.FileName.Trim('\"');
+                byte[] fileArray = await file.ReadAsByteArrayAsync();
+
+                using (System.IO.FileStream fs = new System.IO.FileStream(root + filename, System.IO.FileMode.Create))
+                {
+                    await fs.WriteAsync(fileArray, 0, fileArray.Length);
+                }
+                clinic.ImageUri = "~/Content/Images/"+ filename;
+            }
+            clinicRepository.UpdateClinic(clinic);
+            clinicRepository.Save();
+
+            return Ok();
+        }
+
 
         // DELETE api/clinics/1
         [ResponseType(typeof(Clinic))]
