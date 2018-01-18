@@ -94,7 +94,7 @@ namespace HospitalAPI.Controllers
         }
 
 
-        //POST api/clinics/1/addImage
+        //POST api/clinics/1/updateImage
         [ResponseType(typeof(void))]
         [HttpPost]
         [Route("~/api/clinics/{id:int}/updateImage")]

@@ -4,12 +4,17 @@ using System.Linq;
 using System.Data.Entity;
 using System.Web;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace HospitalAPI.Models
 {
-    public class HospitalContext : DbContext
+    public class HospitalContext : IdentityDbContext<ApplicationUser>
     {
-        public HospitalContext() : base("HospitalContext") { }
+        public HospitalContext() : base("HospitalContext", throwIfV1Schema: false) { }
+        public static HospitalContext Create()
+        {
+            return new HospitalContext();
+        }
 
         public DbSet<Clinic> Clinics { get; set; }
         public DbSet<Department> Departments { get; set; }
