@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace HospitalAPI.Controllers
 {
+    [Authorize]
     public class ClinicsController : ApiController
     {
         private IClinicRepository clinicRepository;

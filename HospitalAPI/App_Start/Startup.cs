@@ -1,25 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
+using System.Threading.Tasks;
 using Microsoft.Owin;
-using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.OAuth;
 using Owin;
-using HospitalAPI.Providers;
+using Microsoft.Owin.Security.OAuth;
 using HospitalAPI.Models;
-using HospitalAPI.App_Start;
+using Microsoft.Owin.Security.Cookies;
+using Microsoft.AspNet.Identity;
+using HospitalAPI.Providers;
 
-namespace HospitalAPI
+[assembly: OwinStartup(typeof(HospitalAPI.App_Start.Startup))]
+
+namespace HospitalAPI.App_Start
 {
-    public partial class Startup
+    public class Startup
     {
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
 
         public static string PublicClientId { get; private set; }
 
-        public void ConfigureAuth(IAppBuilder app)
+        public void Configuration(IAppBuilder app)
         {
             app.CreatePerOwinContext(HospitalContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
@@ -38,7 +37,6 @@ namespace HospitalAPI
             };
 
             app.UseOAuthBearerTokens(OAuthOptions);
-
         }
     }
 }
