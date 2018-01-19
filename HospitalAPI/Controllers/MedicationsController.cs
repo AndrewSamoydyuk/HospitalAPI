@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 
 namespace HospitalAPI.Controllers
 {
+    [Authorize]
     public class MedicationsController : ApiController
     {
         private IMedicationRepository medicationRepository;

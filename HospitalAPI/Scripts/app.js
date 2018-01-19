@@ -1,4 +1,76 @@
-﻿function AddImage() {
+﻿$(function () {
+    $('#submit').click(function (e) {
+        e.preventDefault();
+        var data = {
+            Email: $('#email').val(),
+            Password: $('#password').val(),
+            ConfirmPassword: $('#confirmpassword').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/Account/Register',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).success(function (data) {
+            alert("Done");
+        }).fail(function (data) {
+            alert("Something went wrong");
+        });
+    });
+
+
+    var tokenKey = "tokenInfo";
+    $('#submitLogin').click(function (e) {
+        e.preventDefault();
+        var loginData = {
+            grant_type: 'password',
+            username: $('#emailLogin').val(),
+            password: $('#passwordLogin').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/Token',
+            data: loginData
+        }).success(function (data) {
+            $('.userName').text(data.userName);
+            $('.userInfo').css('display', 'block');
+            $('.loginForm').css('display', 'none');
+            sessionStorage.setItem(tokenKey, data.access_token);
+            console.log(data.access_token);
+        }).fail(function (data) {
+            alert('SOmething went wrong');
+        });
+    });
+
+    $('#logOut').click(function (e) {
+        e.preventDefault();
+        sessionStorage.removeItem(tokenKey);
+    });
+
+    $('#getItemsButton').click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'GET',
+            url: '/api/clinics/',
+            beforeSend: function (xhr) {
+
+                var token = sessionStorage.getItem(tokenKey);
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
+            success: function (data) {
+                alert(data);
+            },
+            fail: function (data) {
+                alert(data);
+            }
+        });
+    });
+})
+
+
+function AddImage() {
     var files = document.getElementById('uploadFile').files;
     if (files.length > 0) {
         if (window.FormData !== undefined) {

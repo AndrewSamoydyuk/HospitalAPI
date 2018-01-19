@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace HospitalAPI.Controllers
 {
+    [Authorize]
     public class DoctorsController : ApiController
     {
         private IDoctorRepository doctorRepository;

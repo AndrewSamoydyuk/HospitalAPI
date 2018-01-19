@@ -30,6 +30,7 @@ namespace HospitalAPI.Controllers
 
         // GET api/Clinics
         [HttpGet]
+        [AllowAnonymous]
         public IEnumerable<ClinicDTO> GetClinics()
         {
             return clinicRepository.GetClinics();
@@ -37,6 +38,7 @@ namespace HospitalAPI.Controllers
 
         // GET api/Clinics/1
         [HttpGet]
+        [AllowAnonymous]
         [ResponseType(typeof(ClinicDetailDTO))]
         public IHttpActionResult GetClinic(int id)
         {
