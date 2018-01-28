@@ -6,6 +6,8 @@
     using HospitalAPI.Models;
     using System.Linq;
     using System.Collections.Generic;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.AspNet.Identity;
 
     internal sealed class Configuration : DbMigrationsConfiguration<HospitalContext>
     {
@@ -84,22 +86,66 @@
             schedules.ForEach(s => context.Schedule.AddOrUpdate(c => c.Id, s));
             context.SaveChanges();
 
+            var RoleStore = new RoleStore<IdentityRole>(context);
+            var RoleManager = new RoleManager<IdentityRole>(RoleStore);
+            var roles = new List<ApplicationRole>
+                {
+                    new ApplicationRole(){ Name = "Admin", Description = "Manage the application"},
+                    new ApplicationRole(){ Name = "Doctor", Description = "Can see patient information and change it"},
+                    new ApplicationRole(){ Name = "Patient", Description = "Can see only his own information"}
+                };
+            roles.ForEach(r => RoleManager.Create(r));
+            RoleStore.Context.SaveChanges();
+
+            var UserStore = new UserStore<ApplicationUser>(context);
+            var UserManager = new UserManager<ApplicationUser>(UserStore);
+            var admin = new ApplicationUser() { Email = "admin@gmail.com", UserName = "admin@gmail.com" };
+            UserManager.Create(admin, "password");
+            UserStore.Context.SaveChanges();
+            admin = UserManager.Find("admin@gmail.com", "password");
+            UserManager.AddToRole(admin.Id, "Admin");
+
+            var doctor = new ApplicationUser { Email = "doctor@gmail.com", UserName = "doctor@gmail.com" };
+            UserManager.Create(doctor, "password");
+            UserStore.Context.SaveChanges();
+            doctor = UserManager.Find("doctor@gmail.com", "password");
+            UserManager.AddToRole(doctor.Id, "Doctor");
+
+            var users = new List<ApplicationUser>
+                {
+                    new ApplicationUser(){ Email = "George@gmail.com", UserName ="George@gmail.com"},
+                    new ApplicationUser(){ Email = "Jeffrey@ukr.net", UserName ="Jeffrey@ukr.net"},
+                    new ApplicationUser(){ Email = "Brian@gmail.com", UserName ="Brian@gmail.com"},
+                    new ApplicationUser(){ Email = "Marjorie@rambler.ru", UserName ="Marjorie@rambler.ru"},
+                    new ApplicationUser(){ Email = "Lynn@gmail.com", UserName ="Lynn@gmail.com"},
+                    new ApplicationUser(){ Email = "Marva@mail.ru", UserName ="Marva@mail.ru"},
+                    new ApplicationUser(){ Email = "Vivian@gmail.com", UserName ="Vivian@gmail.com"}
+                };
+            users.ForEach(u => UserManager.Create(u, "password"));
+            UserStore.Context.SaveChanges();
+            for (int i = 0; i < users.Count; i++)
+            {
+                users[i] = UserManager.Find(users[i].Email, "password");
+            }
+            users.ForEach(u => UserManager.AddToRole(u.Id, "Patient"));
+            UserStore.Context.SaveChanges();
+
             var patients = new List<Patient>
                 {
                     new Patient(){ FullName = "George A. Grantham", Address = "2124 Atha Drive", DateOfBirth= DateTime.Parse("March 6, 1996"), Phone = "661-762-9592", Sex = "Male",
-                        ImageUri = "DefaulImageForPatient.jpg"},
+                        ApplicationUserID = users.Single(u=>u.Email=="George@gmail.com").Id, ImageUri = "DefaulImageForPatient.jpg"},
                     new Patient(){ FullName = "Jeffrey S. Morgan", Address = "3793 James Street", DateOfBirth= DateTime.Parse("May 25, 1973"), Phone = "585-593-7478", Sex = "Male",
-                        ImageUri = "DefaulImageForPatient.jpg"},
+                        ApplicationUserID = users.Single(u=>u.Email=="Jeffrey@ukr.net").Id, ImageUri = "DefaulImageForPatient.jpg"},
                     new Patient(){ FullName = "Brian L. Bower", Address = "1718 Goldleaf Lane", DateOfBirth= DateTime.Parse("March 11, 1965"), Phone = "201-585-5032", Sex = "Male",
-                        ImageUri = "DefaulImageForPatient.jpg"},
+                        ApplicationUserID = users.Single(u=>u.Email=="Brian@gmail.com").Id, ImageUri = "DefaulImageForPatient.jpg"},
                     new Patient(){ FullName = "Marjorie S. Lombard", Address = "2950 Hall Valley Drive", DateOfBirth= DateTime.Parse("January 7, 1948"), Phone = "304-639-8050", Sex = "Female",
-                        ImageUri = "DefaulImageForPatient.jpg"},
+                        ApplicationUserID = users.Single(u=>u.Email=="Marjorie@rambler.ru").Id, ImageUri = "DefaulImageForPatient.jpg"},
                     new Patient(){ FullName = "Lynn J. Larson", Address = "1012 Buck Drive", DateOfBirth= DateTime.Parse("April 1, 1984"), Phone = "802-221-2858", Sex = "Female",
-                        ImageUri = "DefaulImageForPatient.jpg"},
+                        ApplicationUserID = users.Single(u=>u.Email=="Lynn@gmail.com").Id, ImageUri = "DefaulImageForPatient.jpg"},
                     new Patient(){ FullName = "Marva R. Orr", Address = "1259 River Road", DateOfBirth= DateTime.Parse("March 10, 1967"), Phone = "719-503-7851", Sex = "Female",
-                        ImageUri = "DefaulImageForPatient.jpg"},
+                        ApplicationUserID = users.Single(u=>u.Email=="Marva@mail.ru").Id, ImageUri = "DefaulImageForPatient.jpg"},
                     new Patient(){ FullName = "Vivian J. Mott", Address = "963 Washington Street", DateOfBirth= DateTime.Parse("April 19, 1985"), Phone = "361-439-5374", Sex = "Female",
-                        ImageUri = "DefaulImageForPatient.jpg"},
+                        ApplicationUserID = users.Single(u=>u.Email=="Vivian@gmail.com").Id, ImageUri = "DefaulImageForPatient.jpg"},
                 };
 
             patients.ForEach(p => context.Patients.AddOrUpdate(d => d.Id, p));
@@ -142,22 +188,22 @@
             medications.ForEach(m => context.Medications.AddOrUpdate(d => d.Id, m));
             context.SaveChanges();
 
-            //var patientVisitMedication = new List<PatientVisitMedication> {
+            var patientVisitMedication = new List<PatientVisitMedication> {
 
-            //    new PatientVisitMedication() { CountOfDays = 10, MedicationID = medications.Single(m => m.Name == "Halcion").Id, PatientVisitID = patientVisits.Single(v => v.Id == 1).Id },
-            //    new PatientVisitMedication() { CountOfDays = 13, MedicationID = medications.Single(m => m.Name == "Butrans").Id, PatientVisitID = patientVisits.Single(v => v.Id == 1).Id },
-            //    new PatientVisitMedication() { CountOfDays = 30, MedicationID = medications.Single(m => m.Name == "Acarbose").Id, PatientVisitID = patientVisits.Single(v => v.Id == 1).Id },
-            //    new PatientVisitMedication() { CountOfDays = 3, MedicationID = medications.Single(m => m.Name == "Abacavir Sulfate").Id, PatientVisitID = patientVisits.Single(v => v.Id == 2).Id },
-            //    new PatientVisitMedication() { CountOfDays = 4, MedicationID = medications.Single(m => m.Name == "Acarbose").Id, PatientVisitID = patientVisits.Single(v => v.Id == 3).Id },
-            //    new PatientVisitMedication() { CountOfDays = 5, MedicationID = medications.Single(m => m.Name == "Baraclude").Id, PatientVisitID = patientVisits.Single(v => v.Id == 4).Id },
-            //    new PatientVisitMedication() { CountOfDays = 7, MedicationID = medications.Single(m => m.Name == "Halcion").Id, PatientVisitID = patientVisits.Single(v => v.Id == 4).Id },
-            //    new PatientVisitMedication() { CountOfDays = 12, MedicationID = medications.Single(m => m.Name == "Paraplatin").Id, PatientVisitID = patientVisits.Single(v => v.Id == 5).Id },
-            //    new PatientVisitMedication() { CountOfDays = 17, MedicationID = medications.Single(m => m.Name == "Abacavir Sulfate").Id, PatientVisitID = patientVisits.Single(v => v.Id == 5).Id },
-            //    new PatientVisitMedication() { CountOfDays = 10, MedicationID = medications.Single(m => m.Name == "Halcion").Id, PatientVisitID = patientVisits.Single(v => v.Id == 5).Id }
-            //};
+                new PatientVisitMedication() { CountOfDays = 10, MedicationID = medications.Single(m => m.Name == "Halcion").Id, PatientVisitID = patientVisits.Single(v => v.Id == 1).Id },
+                new PatientVisitMedication() { CountOfDays = 13, MedicationID = medications.Single(m => m.Name == "Butrans").Id, PatientVisitID = patientVisits.Single(v => v.Id == 1).Id },
+                new PatientVisitMedication() { CountOfDays = 30, MedicationID = medications.Single(m => m.Name == "Acarbose").Id, PatientVisitID = patientVisits.Single(v => v.Id == 1).Id },
+                new PatientVisitMedication() { CountOfDays = 3, MedicationID = medications.Single(m => m.Name == "Abacavir Sulfate").Id, PatientVisitID = patientVisits.Single(v => v.Id == 2).Id },
+                new PatientVisitMedication() { CountOfDays = 4, MedicationID = medications.Single(m => m.Name == "Acarbose").Id, PatientVisitID = patientVisits.Single(v => v.Id == 3).Id },
+                new PatientVisitMedication() { CountOfDays = 5, MedicationID = medications.Single(m => m.Name == "Baraclude").Id, PatientVisitID = patientVisits.Single(v => v.Id == 4).Id },
+                new PatientVisitMedication() { CountOfDays = 7, MedicationID = medications.Single(m => m.Name == "Halcion").Id, PatientVisitID = patientVisits.Single(v => v.Id == 4).Id },
+                new PatientVisitMedication() { CountOfDays = 12, MedicationID = medications.Single(m => m.Name == "Paraplatin").Id, PatientVisitID = patientVisits.Single(v => v.Id == 5).Id },
+                new PatientVisitMedication() { CountOfDays = 17, MedicationID = medications.Single(m => m.Name == "Abacavir Sulfate").Id, PatientVisitID = patientVisits.Single(v => v.Id == 5).Id },
+                new PatientVisitMedication() { CountOfDays = 10, MedicationID = medications.Single(m => m.Name == "Halcion").Id, PatientVisitID = patientVisits.Single(v => v.Id == 5).Id }
+            };
 
-            //patientVisitMedication.ForEach(pv => context.PatientVisitMedication.AddOrUpdate(v => v.MedicationID, pv));
-            //context.SaveChanges();
+            patientVisitMedication.ForEach(pv => context.PatientVisitMedication.AddOrUpdate(v => v.MedicationID, pv));
+            context.SaveChanges();
 
         }
     }

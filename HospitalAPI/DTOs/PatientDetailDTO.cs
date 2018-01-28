@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using HospitalAPI.Models;
 
 namespace HospitalAPI.DTOs
 {
@@ -20,5 +21,7 @@ namespace HospitalAPI.DTOs
         public DateTime DateOfBirth { get; set; }
 
         public IEnumerable<VisitDTO> Visits { get; set; }
+
+        public string UserName { get; set; }
     }
 }

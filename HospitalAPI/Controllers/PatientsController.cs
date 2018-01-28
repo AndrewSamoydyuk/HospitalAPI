@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace HospitalAPI.Controllers
 {
-    [Authorize]
     public class PatientsController : ApiController
     {
         private IPatientRepository patientRepository;
@@ -29,6 +28,7 @@ namespace HospitalAPI.Controllers
 
         // GET api/patients
         [HttpGet]
+        [Authorize(Roles = "Admin, Doctor")]
         public IEnumerable<PatientDTO> GetPatients()
         {
             return patientRepository.GetPatients();
@@ -36,6 +36,7 @@ namespace HospitalAPI.Controllers
 
         //GET api/patients/getVisitsByDate/date
         [HttpGet]
+        [Authorize(Roles = "Admin, Doctor")]
         [Route("~/api/patients/getVisitsByDate/{*date:datetime:regex(\\d{4}/\\d{2}/\\d{2})}")] // * - span several URI segments
         public IEnumerable<VisitDTO> GetVisitsByDate(DateTime date)
         {
@@ -44,20 +45,38 @@ namespace HospitalAPI.Controllers
 
         // GET api/patient/1
         [HttpGet]
+        [Authorize(Roles = "Admin, Doctor, Patient")]
         [ResponseType(typeof(PatientDetailDTO))]
         public IHttpActionResult GetPatient(int id)
         {
             var patient = patientRepository.GetPatientDetails(id);
+
             if (patient == null)
             {
                 return NotFound();
             }
 
-            return Ok(patient);
+            if (User.IsInRole("Patient"))
+            {
+                if (User.Identity.Name == patient.UserName)
+                {
+                    return Ok(patient);
+                }
+                else
+                {
+                    return StatusCode(HttpStatusCode.Forbidden);
+                }
+            }
+            else
+            {
+                return Ok(patient);
+            }
+
         }
 
         //PUT api/patients/1
         [HttpPut]
+        [Authorize(Roles = "Admin, Doctor")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutPatient(int id, [FromBody]Patient patient)
         {
@@ -77,6 +96,7 @@ namespace HospitalAPI.Controllers
 
         //PUT api/patients/visitId/changeStatus
         [HttpPut]
+        [Authorize(Roles = "Admin, Doctor")]
         [Route("~/api/patients/{visitId:int}/changeStatus")]
         [ResponseType(typeof(void))]
         public IHttpActionResult ChangeStatus(int visitId, [FromBody]Status status)
@@ -98,6 +118,7 @@ namespace HospitalAPI.Controllers
         //POST api/patients/1/addImage
         [ResponseType(typeof(void))]
         [HttpPost]
+        [Authorize(Roles = "Admin, Doctor")]
         [Route("~/api/patients/{id:int}/updateImage")]
         public async Task<IHttpActionResult> UpdateImage(int id)
         {
@@ -141,6 +162,7 @@ namespace HospitalAPI.Controllers
 
         //POST api/patients/id/addvisit
         [HttpPost]
+        [Authorize(Roles = "Admin, Doctor")]
         [Route("~/api/patients/{id:int}/addvisit")]
         [ResponseType(typeof(void))]
         public IHttpActionResult AddVisit(int id,[FromBody]PatientVisit visit)
@@ -160,6 +182,7 @@ namespace HospitalAPI.Controllers
         }
 
         // POST api/patients/visitId/addMedication
+        [Authorize(Roles = "Admin, Doctor")]
         [Route("~/api/patients/{visitId:int}/addMedication")]
         [ResponseType(typeof(void))]
         public IHttpActionResult AddMedication(int visitId, [FromBody] PatientVisitMedication medication)
@@ -179,6 +202,7 @@ namespace HospitalAPI.Controllers
 
         // POST api/patients
         [HttpPost]
+        [Authorize(Roles = "Admin, Doctor")]
         [ResponseType(typeof(PatientDTO))]
         public IHttpActionResult PostPatient([FromBody] Patient patient)
         {
@@ -202,6 +226,7 @@ namespace HospitalAPI.Controllers
 
         // DELETE api/patients/1
         [HttpDelete]
+        [Authorize(Roles = "Admin, Doctor")]
         public IHttpActionResult DeletePatient(int id)
         {
             var patient = patientRepository.GetPatientById(id);

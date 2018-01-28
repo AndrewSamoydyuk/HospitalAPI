@@ -36,4 +36,16 @@ namespace HospitalAPI.App_Start
             return manager;
         }
     }
+
+    public class ApplicationRoleManager : RoleManager<ApplicationRole>
+    {
+        public ApplicationRoleManager(RoleStore<ApplicationRole> store) : base (store)
+        { }
+
+        public static ApplicationRoleManager Create (IdentityFactoryOptions<ApplicationRoleManager> options,
+            IOwinContext context)
+        {
+            return new ApplicationRoleManager(new RoleStore<ApplicationRole>(context.Get<HospitalContext>()));
+        }
+    }
 }

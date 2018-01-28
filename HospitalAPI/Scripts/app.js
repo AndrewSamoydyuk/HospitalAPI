@@ -53,7 +53,7 @@
         e.preventDefault();
         $.ajax({
             type: 'GET',
-            url: '/api/clinics/',
+            url: '/api/patients/',
             beforeSend: function (xhr) {
 
                 var token = sessionStorage.getItem(tokenKey);
@@ -67,7 +67,26 @@
             }
         });
     });
-})
+
+    $('#getPatientInfo').click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'GET',
+            url: '/api/patients/1',
+            beforeSend: function (xhr) {
+
+                var token = sessionStorage.getItem(tokenKey);
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
+            success: function (data) {
+                alert(data);
+            },
+            fail: function (data) {
+                alert(data);
+            }
+        });
+    });
+});
 
 
 function AddImage() {

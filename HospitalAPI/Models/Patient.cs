@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HospitalAPI.Models
 {
@@ -26,6 +27,11 @@ namespace HospitalAPI.Models
         public DateTime DateOfBirth { get; set; }
 
         public ICollection<PatientVisit> Visits { get; set; }
+
+        public string ApplicationUserID { get; set; }
+
+        [ForeignKey("ApplicationUserID")]
+        public ApplicationUser ApplicationUser { get; set; }
 
     }
 }

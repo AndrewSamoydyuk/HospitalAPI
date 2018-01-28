@@ -60,7 +60,7 @@ namespace HospitalAPI.DALs
 
         public PatientDetailDTO GetPatientDetails(int id)
         {
-            var patient = (from p in db.Patients.Include(pat => pat.Visits)
+            var patient = (from p in db.Patients.Include(pat => pat.Visits).Include(pat=>pat.ApplicationUser)
                            select new PatientDetailDTO
                            {
                                Id = p.Id,
@@ -70,6 +70,7 @@ namespace HospitalAPI.DALs
                                ImageUri = p.ImageUri,
                                Phone = p.Phone,
                                Sex = p.Sex,
+                               UserName = p.ApplicationUser.UserName,
                                Visits = from visit in p.Visits
                                         select new VisitDTO
                                         {

@@ -14,4 +14,11 @@ namespace HospitalAPI.Models
             return userIdentity;
         }
     }
+
+    public class ApplicationRole :IdentityRole
+    {
+        public ApplicationRole() { }
+
+        public string Description { get; set; }
+    }
 }

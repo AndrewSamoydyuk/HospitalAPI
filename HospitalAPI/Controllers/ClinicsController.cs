@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace HospitalAPI.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ClinicsController : ApiController
     {
         private IClinicRepository clinicRepository;
@@ -93,7 +93,7 @@ namespace HospitalAPI.Controllers
                 ImageUri = clinic.ImageUri
             };
 
-            return CreatedAtRoute("DefaultApi", new { id = clinic.Id }, clinicDTO );
+            return CreatedAtRoute("DefaultApi", new { id = clinic.Id }, clinicDTO);
         }
 
 
@@ -133,7 +133,7 @@ namespace HospitalAPI.Controllers
                 {
                     await fs.WriteAsync(fileArray, 0, fileArray.Length);
                 }
-                clinic.ImageUri = "~/Content/Images/"+ filename;
+                clinic.ImageUri = "~/Content/Images/" + filename;
             }
             clinicRepository.UpdateClinic(clinic);
             clinicRepository.Save();

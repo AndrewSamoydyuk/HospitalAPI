@@ -11,7 +11,6 @@ using System.Web.Http.Description;
 
 namespace HospitalAPI.Controllers
 {
-    [Authorize]
     public class MedicationsController : ApiController
     {
         private IMedicationRepository medicationRepository;
@@ -28,6 +27,7 @@ namespace HospitalAPI.Controllers
 
         // GET api/medications
         [HttpGet]
+        [Authorize]
         public IEnumerable<MedicationDTO> GetMedications()
         {
             return medicationRepository.GetMedications();
@@ -36,6 +36,7 @@ namespace HospitalAPI.Controllers
         //GET api/medications/1
         [HttpGet]
         [ResponseType(typeof(MedicationDTO))]
+        [Authorize]
         public IHttpActionResult GetMedication(int id)
         {
             var medication = medicationRepository.MedicationDetails(id);
@@ -51,6 +52,7 @@ namespace HospitalAPI.Controllers
         //POST api/medication
         [HttpPost]
         [ResponseType(typeof(Medication))]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult PostMedication([FromBody]Medication medication)
         {
             if (ModelState.IsValid)
@@ -69,6 +71,7 @@ namespace HospitalAPI.Controllers
         // DELETE api/medications/1
         [HttpDelete]
         [ResponseType(typeof(Medication))]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult DeleteMedication(int id)
         {
             var medication = medicationRepository.GetMedicationById(id);

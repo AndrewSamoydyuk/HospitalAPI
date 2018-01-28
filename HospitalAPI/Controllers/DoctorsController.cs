@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace HospitalAPI.Controllers
 {
-    [Authorize]
+
     public class DoctorsController : ApiController
     {
         private IDoctorRepository doctorRepository;
@@ -29,6 +29,7 @@ namespace HospitalAPI.Controllers
 
         //GET api/doctors
         [HttpGet]
+        [Authorize(Roles = "Admin, Doctor")]
         public IEnumerable<DoctorDTO> GetDoctors()
         {
             return doctorRepository.GetDoctors();
@@ -37,6 +38,7 @@ namespace HospitalAPI.Controllers
         // GET api/doctors/getByWorkDay/Monday
         [HttpGet]
         [Route("~/api/doctors/getByWorkDay/{day}")]
+        [Authorize(Roles = "Admin, Doctor")]
         public IEnumerable<DoctorDTO> GetByWorkDay(string day)
         {
             return doctorRepository.GetDoctorsByWorkDay(day);
@@ -45,6 +47,7 @@ namespace HospitalAPI.Controllers
 
         //GET api/doctors/1
         [HttpGet]
+        [Authorize(Roles = "Admin,Doctor")]
         [ResponseType(typeof(DoctorDetailDTO))]
         public IHttpActionResult GetDoctor(int id)
         {
@@ -61,6 +64,7 @@ namespace HospitalAPI.Controllers
         //PUT api/doctors/1
         [HttpPut]
         [ResponseType(typeof(void))]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult PutDoctor(int id, [FromBody]Doctor doctor)
         {
             if (!ModelState.IsValid)
@@ -81,6 +85,7 @@ namespace HospitalAPI.Controllers
         // POST api/doctors
         [HttpPost]
         [ResponseType(typeof(DoctorDTO))]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult PostDoctor([FromBody]Doctor doctor)
         {
             if (!ModelState.IsValid)
@@ -105,6 +110,7 @@ namespace HospitalAPI.Controllers
         //POST api/doctors/1/addImage
         [ResponseType(typeof(void))]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [Route("~/api/doctors/{id:int}/updateImage")]
         public async Task<IHttpActionResult> UpdateImage(int id)
         {
@@ -148,6 +154,7 @@ namespace HospitalAPI.Controllers
 
         // DELETE api/doctors/1
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult DeleteDoctor(int id)
         {
             var doctor = doctorRepository.GetDoctorById(id);
