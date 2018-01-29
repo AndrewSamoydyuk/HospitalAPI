@@ -95,38 +95,65 @@
             }
         });
     });
-});
 
+    $('#addClinic').click(function (e) {
+        e.preventDefault();
+        var clinic = { Name: "NewName", Address: "newAddress", ImageUri: "Url" };
 
-function AddImage() {
-    var files = document.getElementById('uploadFile').files;
-    if (files.length > 0) {
-        if (window.FormData !== undefined) {
-            var data = new FormData();
-            for (var x = 0; x < files.length; x++) {
-                data.append("file" + x, files[x]);
+        $.ajax({
+            type: "POST",
+            data: JSON.stringify(clinic),
+            url: "api/Clinics",
+            beforeSend: function (xhr) {
+
+                var token = sessionStorage.getItem(tokenKey);
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
+            contentType: "application/json",
+
+            success: function (data) {
+                alert("Success");
+            },
+            fail: function (data) {
+                alert(data);
             }
-
-            $.ajax({
-                type: "POST",
-                url: "api/Clinics/2/updateImage",
-                contentType: false,
-                processData: false,
-                data: data
-            });
-        } 
-    }
-};
-
-function AddClinic() {
-    var clinic = { Name: "NewName", Address: "newAddress", ImageUri: "Url" };
-    $.ajax({
-        type: "POST",
-        data: JSON.stringify(clinic),
-        url: "api/Clinics",
-        contentType: "application/json"
+        });
     });
-};
+
+    $('#uploadImage').click(function (e) {
+        e.preventDefault();
+        var files = document.getElementById('uploadFile').files;
+
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                var data = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    data.append("file" + x, files[x]);
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "api/Clinics/5/updateImage",
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function (xhr) {
+
+                        var token = sessionStorage.getItem(tokenKey);
+                        xhr.setRequestHeader("Authorization", "Bearer " + token);
+                    },
+                    data: data,
+                    success: function (data) {
+                        alert("Success");
+                    },
+                    fail: function (data) {
+                        alert(data);
+                    }
+                });
+            }
+        }
+    });
+
+});
 
 function DeleteClinic(id) {
     $.ajax({

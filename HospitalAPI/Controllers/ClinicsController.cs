@@ -8,6 +8,7 @@ using HospitalAPI.DALs;
 using HospitalAPI.Models;
 using System.Web.Http.Description;
 using HospitalAPI.DTOs;
+using HospitalAPI.Helpers;
 using System.Data.Entity.Infrastructure;
 using System.Threading.Tasks;
 
@@ -115,26 +116,12 @@ namespace HospitalAPI.Controllers
                 return NotFound();
             }
 
-            if (System.IO.File.Exists(System.Web.HttpContext.Current.Server.MapPath("~/Content/Images/" + clinic.ImageUri)))
-            {
-                System.IO.File.Delete(System.Web.HttpContext.Current.Server.MapPath("~/Content/Images/" + clinic.ImageUri));
-            }
-
+            //use helper for handling images
+            ImageHandler.DeleteImageIfExist(clinic.ImageUri);
             var provider = new MultipartMemoryStreamProvider();
-            string root = System.Web.HttpContext.Current.Server.MapPath("~/Content/Images/");
             await Request.Content.ReadAsMultipartAsync(provider);
+            clinic.ImageUri = await ImageHandler.UploadImage(provider.Contents.FirstOrDefault());
 
-            foreach (var file in provider.Contents)
-            {
-                var filename = file.Headers.ContentDisposition.FileName.Trim('\"');
-                byte[] fileArray = await file.ReadAsByteArrayAsync();
-
-                using (System.IO.FileStream fs = new System.IO.FileStream(root + filename, System.IO.FileMode.Create))
-                {
-                    await fs.WriteAsync(fileArray, 0, fileArray.Length);
-                }
-                clinic.ImageUri = "~/Content/Images/" + filename;
-            }
             clinicRepository.UpdateClinic(clinic);
             clinicRepository.Save();
 
