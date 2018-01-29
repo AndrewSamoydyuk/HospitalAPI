@@ -9,9 +9,14 @@
 <br />
 <br />
 <div>
+    <input type="text" id="patientID" value="1" />
     <input type="submit" id="getPatientInfo" value="get patient info" />
 </div>
 <br />
+<br />
+<div id="contentDiv"></div>
+<br />
+
 <button onclick="AddClinic()"> Add</button>
 <button onclick="DeleteClinic(5)"> Delete</button>
 <button onclick="UpdateClinic()"> Update</button>
@@ -23,19 +28,6 @@
 <input type="file" name="upload" id="uploadFile" /><br />
 <button onclick="AddImage()"> AddImage</button>
 
-<hr />
-
-<div>
-    <label>Email</label><br />
-    <input type="email" id="email" /> <br /><br />
-    <label>Password</label><br />
-    <input type="password" id="password" /><br /><br />
-    <label>Confirm password</label><br />
-    <input type="password" id="confirmpassword" /><br /><br />
-    <input type="submit" id="submit" value="Регистрация" />
-</div>
-
-<hr />
 
 <div class="userInfo" style="display:none;">
     <p>Вы вошли как: <span class="userName"></span></p>
@@ -49,4 +41,40 @@
     <input type="password" id="passwordLogin" /><br /><br />
     <input type="submit" id="submitLogin" value="Логин" />
 </div>
+
+
+<hr />
+<p>Register</p>
+<hr />
+
+<div>
+    <label>Email</label><br />
+    <input type="email" id="email" /> <br /><br />
+
+    <label>Password</label><br />
+    <input type="password" id="password" /><br /><br />
+
+    <label>Confirm password</label><br />
+    <input type="password" id="confirmpassword" /><br /><br />
+
+    <label>FullName</label><br />
+    <input type="text" id="fullName" /><br /><br />
+
+    <label>Sex</label><br />
+    <input type="text" id="sex" /><br /><br />
+
+    <label>Address</label><br />
+    <input type="text" id="address" /><br /><br />
+
+    <label>Phone</label><br />
+    <input type="text" id="phone" /><br /><br />
+
+    <label>Date of birth</label><br />
+    <input type="date" id="dateOfBirth" /><br /><br />
+
+    <input type="submit" id="submit" value="Регистрация" />
+</div>
+
+<hr />
+
 

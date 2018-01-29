@@ -4,7 +4,12 @@
         var data = {
             Email: $('#email').val(),
             Password: $('#password').val(),
-            ConfirmPassword: $('#confirmpassword').val()
+            ConfirmPassword: $('#confirmpassword').val(),
+            FullName: $('#fullName').val(),
+            Sex: $('#sex').val(),
+            Address: $('#address').val(),
+            Phone: $('#phone').val(),
+            DateOfBirth: $('#dateOfBirth').val()
         };
 
         $.ajax({
@@ -60,7 +65,10 @@
                 xhr.setRequestHeader("Authorization", "Bearer " + token);
             },
             success: function (data) {
-                alert(data);
+                var i;
+                for (i = 0; i < data.length; i++) {
+                    $('#contentDiv').append(data[i].FullName + "<br/>");
+                }
             },
             fail: function (data) {
                 alert(data);
@@ -70,16 +78,17 @@
 
     $('#getPatientInfo').click(function (e) {
         e.preventDefault();
+        var id = $("#patientID").val();
         $.ajax({
             type: 'GET',
-            url: '/api/patients/1',
+            url: '/api/patients/' + id,
             beforeSend: function (xhr) {
 
                 var token = sessionStorage.getItem(tokenKey);
                 xhr.setRequestHeader("Authorization", "Bearer " + token);
             },
             success: function (data) {
-                alert(data);
+                $('#contentDiv').append(JSON.stringify(data));              
             },
             fail: function (data) {
                 alert(data);

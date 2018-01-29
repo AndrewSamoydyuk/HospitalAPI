@@ -20,6 +20,21 @@ namespace HospitalAPI.Models
         [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "Passwords do not match")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        public string FullName { get; set; }
+
+        [Required]
+        public string Sex { get; set; }
+
+        public string Address { get; set; }
+
+        public string Phone { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime DateOfBirth { get; set; }
+
     }
 
     public class ChangePasswordBindingModel

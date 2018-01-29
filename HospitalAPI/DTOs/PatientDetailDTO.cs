@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using HospitalAPI.Models;
 
 namespace HospitalAPI.DTOs
@@ -22,6 +23,7 @@ namespace HospitalAPI.DTOs
 
         public IEnumerable<VisitDTO> Visits { get; set; }
 
+        [IgnoreDataMember]
         public string UserName { get; set; }
     }
 }

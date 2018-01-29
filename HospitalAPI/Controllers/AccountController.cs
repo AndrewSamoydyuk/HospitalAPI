@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using HospitalAPI.Models;
 using HospitalAPI.Providers;
 using HospitalAPI.App_Start;
+using HospitalAPI.DALs;
 using HospitalAPI.Results;
 
 namespace HospitalAPI.Controllers
@@ -26,9 +27,11 @@ namespace HospitalAPI.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        private IPatientRepository patientRepository;
 
         public AccountController()
         {
+            this.patientRepository = new PatientRepository(new HospitalContext());
         }
 
         public AccountController(ApplicationUserManager userManager,
@@ -93,7 +96,21 @@ namespace HospitalAPI.Controllers
 
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
 
+            var patient = new Patient() {
+                FullName = model.FullName,
+                Address = model.Address,
+                DateOfBirth = model.DateOfBirth,
+                Sex = model.Sex,
+                Phone = model.Phone,
+                ImageUri = "DefaultImageForPatient.jpg"
+            };
+
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+            UserManager.AddToRole(user.Id, "Patient");
+            patient.ApplicationUserID = user.Id;
+
+            patientRepository.AddPatient(patient);
+            patientRepository.Save();
 
             if (!result.Succeeded)
             {
