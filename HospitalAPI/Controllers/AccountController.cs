@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using HospitalAPI.Models;
 using HospitalAPI.Providers;
 using HospitalAPI.App_Start;
+using HospitalAPI.Filters;
 using HospitalAPI.DALs;
 using HospitalAPI.Results;
 
@@ -66,13 +67,9 @@ namespace HospitalAPI.Controllers
 
         // POST api/Account/ChangePassword
         [Route("ChangePassword")]
+        [ValidateModel]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
 
@@ -86,14 +83,10 @@ namespace HospitalAPI.Controllers
 
         // POST api/Account/Register
         [AllowAnonymous]
+        [ValidateModel]
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
 
             var patient = new Patient() {

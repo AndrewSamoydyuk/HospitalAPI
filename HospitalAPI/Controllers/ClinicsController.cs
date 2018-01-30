@@ -8,6 +8,7 @@ using HospitalAPI.DALs;
 using HospitalAPI.Models;
 using System.Web.Http.Description;
 using HospitalAPI.DTOs;
+using HospitalAPI.Filters;
 using HospitalAPI.Helpers;
 using System.Data.Entity.Infrastructure;
 using System.Threading.Tasks;
@@ -55,14 +56,11 @@ namespace HospitalAPI.Controllers
 
         // PUT api/Clinic/1
         [HttpPut]
+        [ValidateModel]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutClinic(int id, [FromBody]Clinic clinic)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            else if (clinicRepository.GetClinicById(id) == null)
+            if (clinicRepository.GetClinicById(id) == null)
             {
                 return NotFound();
             }
@@ -75,14 +73,10 @@ namespace HospitalAPI.Controllers
 
         // POST api/Clinics
         [HttpPost]
+        [ValidateModel]
         [ResponseType(typeof(ClinicDTO))]
         public IHttpActionResult PostClinic([FromBody]Clinic clinic)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
             clinicRepository.AddClinic(clinic);
             clinicRepository.Save();
 
@@ -149,14 +143,10 @@ namespace HospitalAPI.Controllers
 
         //POST api/clinics/addDepartment
         [HttpPost]
+        [ValidateModel]
         [Route("~/api/clinics/addDepartment")]
         public IHttpActionResult PostDepartment([FromBody]Department department)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
             clinicRepository.AddDepartment(department);
             clinicRepository.Save();
 

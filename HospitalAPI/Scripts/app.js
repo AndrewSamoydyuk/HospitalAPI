@@ -98,12 +98,36 @@
 
     $('#addClinic').click(function (e) {
         e.preventDefault();
-        var clinic = { Name: "NewName", Address: "newAddress", ImageUri: "Url" };
+        var clinic = { Name: "Ne", Address: "newAddress", ImageUri: "Url" };
 
         $.ajax({
             type: "POST",
             data: JSON.stringify(clinic),
             url: "api/Clinics",
+            beforeSend: function (xhr) {
+
+                var token = sessionStorage.getItem(tokenKey);
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
+            contentType: "application/json",
+
+            success: function (data) {
+                alert("Success");
+            },
+            fail: function (data) {
+                alert(data);
+            }
+        });
+    });
+
+    $('#addDepartment').click(function (e) {
+        e.preventDefault();
+        var department = { Name: "NewDepartmentName", ClinicID: 1 };
+
+        $.ajax({
+            type: "POST",
+            data: JSON.stringify(department),
+            url: "api/clinics/addDepartment",
             beforeSend: function (xhr) {
 
                 var token = sessionStorage.getItem(tokenKey);
@@ -168,16 +192,6 @@ function UpdateClinic() {
         type: "PUT",
         data: JSON.stringify(clinic),
         url: "api/Clinics/5",
-        contentType: "application/json"
-    });
-};
-
-function AddDepartment() {
-    var department = { Name: "NewNameForDepartment", ClinicID: 1 };
-    $.ajax({
-        type: "POST",
-        data: JSON.stringify(department),
-        url: "api/clinics/addDepartment",
         contentType: "application/json"
     });
 };

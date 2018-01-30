@@ -8,6 +8,7 @@ using HospitalAPI.Models;
 using HospitalAPI.DALs;
 using HospitalAPI.DTOs;
 using HospitalAPI.Helpers;
+using HospitalAPI.Filters;
 using System.Web.Http.Description;
 using System.Threading.Tasks;
 
@@ -42,8 +43,7 @@ namespace HospitalAPI.Controllers
         [Authorize(Roles = "Admin, Doctor")]
         public IEnumerable<DoctorDTO> GetByWorkDay(string day)
         {
-            return doctorRepository.GetDoctorsByWorkDay(day);
-            
+            return doctorRepository.GetDoctorsByWorkDay(day);           
         }
 
         //GET api/doctors/1
@@ -65,14 +65,11 @@ namespace HospitalAPI.Controllers
         //PUT api/doctors/1
         [HttpPut]
         [ResponseType(typeof(void))]
+        [ValidateModel]
         [Authorize(Roles = "Admin")]
         public IHttpActionResult PutDoctor(int id, [FromBody]Doctor doctor)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            else if (doctorRepository.GetDoctorById(id) == null)
+            if (doctorRepository.GetDoctorById(id) == null)
             {
                 return NotFound();
             }
@@ -86,14 +83,10 @@ namespace HospitalAPI.Controllers
         // POST api/doctors
         [HttpPost]
         [ResponseType(typeof(DoctorDTO))]
+        [ValidateModel]
         [Authorize(Roles = "Admin")]
         public IHttpActionResult PostDoctor([FromBody]Doctor doctor)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
+        { 
             doctorRepository.AddDoctor(doctor);
             doctorRepository.Save();
 

@@ -6,3 +6,9 @@ coverage:
   precision: 1
   round: down
   range: "50...100"
+
+ignore:
+  - HospitalAPI/Global.asax.cs
+  - HospitalAPI/Migrations/.*
+  - HospitalAPI/Areas/.*
+

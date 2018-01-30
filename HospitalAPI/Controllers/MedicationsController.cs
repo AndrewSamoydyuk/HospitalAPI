@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using HospitalAPI.DALs;
 using HospitalAPI.DTOs;
+using HospitalAPI.Filters;
 using HospitalAPI.Models;
 using System.Web.Http.Description;
 
@@ -51,21 +52,15 @@ namespace HospitalAPI.Controllers
 
         //POST api/medication
         [HttpPost]
+        [ValidateModel]
         [ResponseType(typeof(Medication))]
         [Authorize(Roles = "Admin")]
         public IHttpActionResult PostMedication([FromBody]Medication medication)
         {
-            if (ModelState.IsValid)
-            {
-                medicationRepository.AddMedication(medication);
-                medicationRepository.Save();
+            medicationRepository.AddMedication(medication);
+            medicationRepository.Save();
 
-                return CreatedAtRoute("DefaultApi", new {id = medication.Id }, medication);
-            }
-            else
-            {
-                return BadRequest();
-            }
+            return CreatedAtRoute("DefaultApi", new {id = medication.Id }, medication);
         }
 
         // DELETE api/medications/1

@@ -8,6 +8,7 @@ using HospitalAPI.DTOs;
 using HospitalAPI.DALs;
 using HospitalAPI.Helpers;
 using HospitalAPI.Models;
+using HospitalAPI.Filters;
 using System.Web.Http.Description;
 using System.Threading.Tasks;
 
@@ -77,14 +78,12 @@ namespace HospitalAPI.Controllers
 
         //PUT api/patients/1
         [HttpPut]
+        [ValidateModel]
         [Authorize(Roles = "Admin, Doctor")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutPatient(int id, [FromBody]Patient patient)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }else if (patientRepository.GetPatientById(id) == null)
+            if (patientRepository.GetPatientById(id) == null)
             {
                 return NotFound();
             }
@@ -149,6 +148,7 @@ namespace HospitalAPI.Controllers
         //POST api/patients/id/addvisit
         [HttpPost]
         [Authorize(Roles = "Admin, Doctor")]
+        [ValidateModel]
         [Route("~/api/patients/{id:int}/addvisit")]
         [ResponseType(typeof(void))]
         public IHttpActionResult AddVisit(int id,[FromBody]PatientVisit visit)
@@ -169,6 +169,7 @@ namespace HospitalAPI.Controllers
 
         // POST api/patients/visitId/addMedication
         [Authorize(Roles = "Admin, Doctor")]
+        [ValidateModel]
         [Route("~/api/patients/{visitId:int}/addMedication")]
         [ResponseType(typeof(void))]
         public IHttpActionResult AddMedication(int visitId, [FromBody] PatientVisitMedication medication)
@@ -188,15 +189,11 @@ namespace HospitalAPI.Controllers
 
         // POST api/patients
         [HttpPost]
+        [ValidateModel]
         [Authorize(Roles = "Admin, Doctor")]
         [ResponseType(typeof(PatientDTO))]
         public IHttpActionResult PostPatient([FromBody] Patient patient)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             patientRepository.AddPatient(patient);
             patientRepository.Save();
 

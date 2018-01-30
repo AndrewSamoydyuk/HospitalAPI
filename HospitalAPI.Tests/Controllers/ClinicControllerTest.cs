@@ -18,14 +18,29 @@ namespace HospitalAPI.Tests.Controllers
     public class ClinicControllerTest
     {
         [Fact]
-        public void ClinicNotFoundIsRight()
+        public void GetClinicNotFoundIsRight()
         {
             var mockRepository = new Mock<IClinicRepository>();
-            //mockRepository.Setup(c => c.ClinicDetails(1)).Returns(new ClinicDetailDTO());
             ClinicsController controller = new ClinicsController(mockRepository.Object);
             IHttpActionResult result = controller.GetClinic(1);
 
             Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public void GetClinicIsRight()
+        {
+            var mockRepository = new Mock<IClinicRepository>();
+            mockRepository.Setup(c => c.ClinicDetails(1)).Returns(new ClinicDetailDTO { Id = 1 });
+
+            ClinicsController controller = new ClinicsController(mockRepository.Object);
+            IHttpActionResult result = controller.GetClinic(1);
+
+            var contentResult = result as OkNegotiatedContentResult<ClinicDetailDTO>;
+
+            Assert.NotNull(contentResult);
+            Assert.NotNull(contentResult.Content);
+            Assert.Equal(1, contentResult.Content.Id);
         }
 
     }

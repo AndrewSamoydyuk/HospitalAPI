@@ -242,6 +242,7 @@
     <Compile Include="DTOs\ScheduleDTO.cs" />
     <Compile Include="DTOs\VisitDTO.cs" />
     <Compile Include="DTOs\VisitMedicationDTO.cs" />
+    <Compile Include="Filters\ValidateModelAttribute .cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
