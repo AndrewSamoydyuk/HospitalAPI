@@ -12,6 +12,7 @@ using HospitalAPI.Filters;
 using HospitalAPI.Helpers;
 using System.Data.Entity.Infrastructure;
 using System.Threading.Tasks;
+using System.Data.Entity.Core;
 
 namespace HospitalAPI.Controllers
 {
@@ -35,7 +36,17 @@ namespace HospitalAPI.Controllers
         [AllowAnonymous]
         public IEnumerable<ClinicDTO> GetClinics()
         {
-            return clinicRepository.GetClinics();
+            try
+            {
+                return clinicRepository.GetClinics();
+            }
+            catch (EntityException)
+            {
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.ServiceUnavailable)
+                {
+                    Content = new StringContent("There was a problem accessing the database, please try again.")
+                });
+            }
         }
 
         // GET api/Clinics/1
@@ -47,7 +58,7 @@ namespace HospitalAPI.Controllers
             var clinic = clinicRepository.ClinicDetails(id);
 
             if (clinic == null)
-            {            
+            {
                 throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
                 {
                     Content = new StringContent($"No clinic with id - {id}")
@@ -73,7 +84,18 @@ namespace HospitalAPI.Controllers
             }
 
             clinicRepository.UpdateClinic(clinic);
-            clinicRepository.Save();
+
+            try
+            {
+                clinicRepository.Save();
+            }
+            catch (DbUpdateException)
+            {
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent("An error occurred while updating, please try again later.")
+                });
+            }
 
             return StatusCode(HttpStatusCode.OK);
         }

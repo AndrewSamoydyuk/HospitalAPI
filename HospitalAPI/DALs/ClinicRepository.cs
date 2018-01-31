@@ -4,6 +4,7 @@ using System.Data.Entity;
 using HospitalAPI.Models;
 using HospitalAPI.DTOs;
 using System.Linq;
+using System.Data.Entity.Infrastructure;
 
 namespace HospitalAPI.DALs
 {

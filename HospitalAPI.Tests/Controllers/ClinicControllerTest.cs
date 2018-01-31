@@ -12,17 +12,30 @@ using System.IO;
 using System.Net;
 using System.Web.Http.Results;
 using System.Web.Http;
+using System.Data.Entity.Core;
+using System.Web.Configuration;
 
 namespace HospitalAPI.Tests.Controllers
 {
     public class ClinicControllerTest
     {
         [Fact]
-        public void GetClinicNotFoundIsCorrect()
+        public void GetClinicsIsCorrect()
+        {
+            var mockRepository = new Mock<IClinicRepository>();
+            mockRepository.Setup(c => c.GetClinics()).Returns(new List<ClinicDTO> { new ClinicDTO { Id = 1, Address = "Address", ImageUri = "Uri", Name = "Name" } });
+            ClinicsController controller = new ClinicsController(mockRepository.Object);
+            List<ClinicDTO> res =  controller.GetClinics() as List<ClinicDTO>;
+
+            Assert.Equal(1, res[0].Id);
+        }
+
+        [Fact]
+        public void GetClinicNotFoundExpectedIsCorrect()
         {
             var mockRepository = new Mock<IClinicRepository>();
             ClinicsController controller = new ClinicsController(mockRepository.Object);
-            Assert.Throws<HttpResponseException>(() => controller.GetClinic(1)); 
+            Assert.Throws<HttpResponseException>(() => controller.GetClinic(1));
         }
 
         [Fact]

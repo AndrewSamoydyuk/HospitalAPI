@@ -58,7 +58,7 @@
         e.preventDefault();
         $.ajax({
             type: 'GET',
-            url: '/api/clinics/10',
+            url: '/api/clinics/1',
             beforeSend: function (xhr) {
 
                 var token = sessionStorage.getItem(tokenKey);
