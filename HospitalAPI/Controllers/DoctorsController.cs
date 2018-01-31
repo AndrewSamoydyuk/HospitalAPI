@@ -56,7 +56,10 @@ namespace HospitalAPI.Controllers
 
             if (doctor == null)
             {
-                return NotFound();
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent($"No doctor with id - {id}")
+                });
             }
 
             return Ok(doctor);
@@ -71,13 +74,16 @@ namespace HospitalAPI.Controllers
         {
             if (doctorRepository.GetDoctorById(id) == null)
             {
-                return NotFound();
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent($"No doctor with id - {id}")
+                });
             }
 
             doctorRepository.UpdateDoctor(doctor);
             doctorRepository.Save();
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return StatusCode(HttpStatusCode.OK);
         }
 
         // POST api/doctors
@@ -117,7 +123,10 @@ namespace HospitalAPI.Controllers
 
             if (doctor == null)
             {
-                return NotFound();
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent($"No doctor with id - {id}")
+                });
             }
 
             ImageHandler.DeleteImageIfExist(doctor.ImageUri);
@@ -139,7 +148,10 @@ namespace HospitalAPI.Controllers
             var doctor = doctorRepository.GetDoctorById(id);
             if (doctor == null)
             {
-                return NotFound();
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent($"No doctor with id - {id}")
+                });
             }
 
             doctorRepository.DeleteDoctor(doctor);

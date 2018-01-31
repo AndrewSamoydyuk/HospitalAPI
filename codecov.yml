@@ -11,4 +11,6 @@ ignore:
   - HospitalAPI/Global.asax.cs
   - HospitalAPI/Migrations/.*
   - HospitalAPI/Areas/.*
+  - HospitalAPI/App_Start/.*
+
 

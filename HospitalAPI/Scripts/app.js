@@ -58,7 +58,7 @@
         e.preventDefault();
         $.ajax({
             type: 'GET',
-            url: '/api/patients/',
+            url: '/api/clinics/10',
             beforeSend: function (xhr) {
 
                 var token = sessionStorage.getItem(tokenKey);
@@ -67,7 +67,7 @@
             success: function (data) {
                 var i;
                 for (i = 0; i < data.length; i++) {
-                    $('#contentDiv').append(data[i].FullName + "<br/>");
+                    $('#contentDiv').append(data[i].Name + "<br/>");
                 }
             },
             fail: function (data) {
@@ -184,7 +184,7 @@ function DeleteClinic(id) {
         type: "DELETE",
         url: "api/Clinics/"+id
     });
-};
+}
 
 function UpdateClinic() {
     var clinic = { Id:5, Name: "Update", Address: "Update", ImageUri: "Update" };
@@ -194,7 +194,7 @@ function UpdateClinic() {
         url: "api/Clinics/5",
         contentType: "application/json"
     });
-};
+}
 
 function AddVisit() {
     var visit = { Date: "January 30 2018", Diagnosis: "NewDiagnos", DoctorID: 4 };
@@ -204,7 +204,7 @@ function AddVisit() {
         url: "api/patients/3/addvisit",
         contentType: "application/json"
     });
-};
+}
 
 function AddMedication() {
     var medication = { CountOfDays: 7, MedicationID: 1 };
@@ -214,7 +214,7 @@ function AddMedication() {
         url: "api/patients/9/addMedication",
         contentType: "application/json"
     });
-};
+}
 
 function ChangeStatus() {
     var status = 1;
@@ -224,7 +224,7 @@ function ChangeStatus() {
         url: "api/patients/6/changeStatus",
         contentType: "application/json"
     });
-};
+}
 
 
 

@@ -44,7 +44,10 @@ namespace HospitalAPI.Controllers
 
             if (medication == null)
             {
-                return NotFound();
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent($"No medication with id - {id}")
+                });
             }
 
             return Ok(medication);
@@ -72,7 +75,13 @@ namespace HospitalAPI.Controllers
             var medication = medicationRepository.GetMedicationById(id);
             if (medication == null)
             {
-                return NotFound();
+                if (medication == null)
+                {
+                    throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+                    {
+                        Content = new StringContent($"No medication with id - {id}")
+                    });
+                }
             }
 
             medicationRepository.DeleteMedication(medication);

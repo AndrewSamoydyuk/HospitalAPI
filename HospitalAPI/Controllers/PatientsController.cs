@@ -55,7 +55,10 @@ namespace HospitalAPI.Controllers
 
             if (patient == null)
             {
-                return NotFound();
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent($"No patient with id - {id}")
+                });
             }
 
             if (User.IsInRole("Patient"))
@@ -85,7 +88,10 @@ namespace HospitalAPI.Controllers
         {
             if (patientRepository.GetPatientById(id) == null)
             {
-                return NotFound();
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent($"No patient with id - {id}")
+                });
             }
 
             patientRepository.UpdatePatient(patient);
@@ -104,14 +110,17 @@ namespace HospitalAPI.Controllers
             var visit = patientRepository.GetVisitById(visitId);
             if (visit == null)
             {
-                return NotFound();
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent($"No visit with id - {visitId}")
+                });
             }
 
             visit.Status = status;
             patientRepository.UpdateVisitStatus(visit);
             patientRepository.Save();
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return StatusCode(HttpStatusCode.OK);
         }
 
 
@@ -131,7 +140,10 @@ namespace HospitalAPI.Controllers
 
             if (patient == null)
             {
-                return NotFound();
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent($"No patient with id - {id}")
+                });
             }
 
             ImageHandler.DeleteImageIfExist(patient.ImageUri);
@@ -151,12 +163,15 @@ namespace HospitalAPI.Controllers
         [ValidateModel]
         [Route("~/api/patients/{id:int}/addvisit")]
         [ResponseType(typeof(void))]
-        public IHttpActionResult AddVisit(int id,[FromBody]PatientVisit visit)
+        public IHttpActionResult AddVisit(int id, [FromBody]PatientVisit visit)
         {
             var patient = patientRepository.GetPatientById(id);
             if (patient == null)
             {
-                return NotFound();
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent($"No patient with id - {id}")
+                });
             }
 
             visit.PatientID = patient.Id;
@@ -177,7 +192,10 @@ namespace HospitalAPI.Controllers
             var visit = patientRepository.GetVisitById(visitId);
             if (visit == null)
             {
-                return NotFound();
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent($"No visit with id - {visitId}")
+                });
             };
 
             medication.PatientVisitID = visitId;
@@ -215,7 +233,10 @@ namespace HospitalAPI.Controllers
             var patient = patientRepository.GetPatientById(id);
             if (patient == null)
             {
-                return NotFound();
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent($"No patient with id - {id}")
+                });
             }
 
             patientRepository.DeletePatient(patient);

@@ -47,8 +47,12 @@ namespace HospitalAPI.Controllers
             var clinic = clinicRepository.ClinicDetails(id);
 
             if (clinic == null)
-            {
-                return NotFound();
+            {            
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent($"No clinic with id - {id}")
+                });
+
             }
 
             return Ok(clinic);
@@ -62,13 +66,16 @@ namespace HospitalAPI.Controllers
         {
             if (clinicRepository.GetClinicById(id) == null)
             {
-                return NotFound();
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent($"No clinic with id - {id}")
+                });
             }
 
             clinicRepository.UpdateClinic(clinic);
             clinicRepository.Save();
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return StatusCode(HttpStatusCode.OK);
         }
 
         // POST api/Clinics
@@ -107,7 +114,10 @@ namespace HospitalAPI.Controllers
 
             if (clinic == null)
             {
-                return NotFound();
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent($"No clinic with id - {id}")
+                });
             }
 
             //use helper for handling images
@@ -131,7 +141,10 @@ namespace HospitalAPI.Controllers
             var clinic = clinicRepository.GetClinicById(id);
             if (clinic == null)
             {
-                return NotFound();
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent($"No clinic with id - {id}")
+                });
             }
 
             clinicRepository.DeleteClinic(clinic);

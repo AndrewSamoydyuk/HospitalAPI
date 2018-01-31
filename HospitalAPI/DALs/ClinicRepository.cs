@@ -53,7 +53,7 @@ namespace HospitalAPI.DALs
 
                           }).SingleOrDefault();
 
-            clinic.Departments.ToList().ForEach(d => d.ResultsOfTreatment = GetResultOfTreatment(d.Id));
+            clinic?.Departments.ToList().ForEach(d => d.ResultsOfTreatment = GetResultOfTreatment(d.Id));
 
 
             return clinic;
