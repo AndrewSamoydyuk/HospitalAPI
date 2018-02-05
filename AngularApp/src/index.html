@@ -19,8 +19,21 @@
         System.import('main.js').catch(function (err) { console.error(err); });
     </script>
 </head>
-
-  <body>
-    <my-app>Loading AppComponent content here ...</my-app>
-  </body>
+<body>
+    <my-app>
+        <div class="preloader">
+            <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-blue">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div><div class="gap-patch">
+                        <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </my-app>
+</body>
 </html>

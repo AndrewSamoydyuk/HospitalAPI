@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { ClinicComponent } from './clinic/clinic.component';
 import { HttpModule } from '@angular/http';
+import { HoverDirective } from './hover.directive';
 
 @NgModule({
     imports: [
@@ -11,7 +12,8 @@ import { HttpModule } from '@angular/http';
     ],
     declarations: [
         AppComponent,
-        ClinicComponent
+        ClinicComponent,
+        HoverDirective
     ],
     bootstrap: [
         AppComponent
