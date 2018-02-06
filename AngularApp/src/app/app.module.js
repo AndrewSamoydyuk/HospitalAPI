@@ -12,6 +12,11 @@ var app_component_1 = require("./app.component");
 var clinic_component_1 = require("./clinic/clinic.component");
 var http_1 = require("@angular/http");
 var hover_directive_1 = require("./hover.directive");
+var home_page_component_1 = require("./home-page/home-page.component");
+var router_1 = require("@angular/router");
+var routes = [
+    { path: '', component: home_page_component_1.HomePageComponent }
+];
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -19,12 +24,14 @@ var AppModule = /** @class */ (function () {
         core_1.NgModule({
             imports: [
                 platform_browser_1.BrowserModule,
-                http_1.HttpModule
+                http_1.HttpModule,
+                router_1.RouterModule.forRoot(routes)
             ],
             declarations: [
                 app_component_1.AppComponent,
                 clinic_component_1.ClinicComponent,
-                hover_directive_1.HoverDirective
+                hover_directive_1.HoverDirective,
+                home_page_component_1.HomePageComponent
             ],
             bootstrap: [
                 app_component_1.AppComponent

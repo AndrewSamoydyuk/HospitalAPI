@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Clinic } from './Clinic';
 import { ClinicsService } from './clinics.service';
 
 @Component({
@@ -8,14 +7,4 @@ import { ClinicsService } from './clinics.service';
     styleUrls: ['./app.component.css'],
     providers: [ClinicsService]
 })
-export class AppComponent  {
-    clinics: Clinic[] = []
-
-    constructor(private clinicsService: ClinicsService) { }
-
-    ngOnInit() {
-        this.clinicsService.getClinics()
-            .subscribe(clinicsData => { this.clinics = clinicsData }
-            )
-    }
-}
+export class AppComponent  { }

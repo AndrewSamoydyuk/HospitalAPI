@@ -1,6 +1,7 @@
 configuration: Release
 
 before_build:
+  - npm --prefix /AngularApp/ install
   - nuget restore
   
 build:

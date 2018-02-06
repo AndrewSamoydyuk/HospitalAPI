@@ -4,16 +4,24 @@ import { AppComponent } from './app.component';
 import { ClinicComponent } from './clinic/clinic.component';
 import { HttpModule } from '@angular/http';
 import { HoverDirective } from './hover.directive';
+import { HomePageComponent } from './home-page/home-page.component';
+import { RouterModule } from '@angular/router';
+
+const routes = [
+    { path: '', component: HomePageComponent }
+];
 
 @NgModule({
     imports: [
         BrowserModule,
-        HttpModule
+        HttpModule,
+        RouterModule.forRoot(routes)
     ],
     declarations: [
         AppComponent,
         ClinicComponent,
-        HoverDirective
+        HoverDirective,
+        HomePageComponent
     ],
     bootstrap: [
         AppComponent

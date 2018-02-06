@@ -20,6 +20,9 @@ var ClinicsService = /** @class */ (function () {
         return this.http.get('http://localhost:49761/api/clinics')
             .map(function (response) { return response.json(); });
     };
+    ClinicsService.prototype.getClinic = function () {
+        return this.http.get('');
+    };
     ClinicsService = __decorate([
         core_1.Injectable(),
         __metadata("design:paramtypes", [http_1.Http])

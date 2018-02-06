@@ -13,4 +13,8 @@ export class ClinicsService {
         return this.http.get('http://localhost:49761/api/clinics')
             .map((response: Response) => <Clinic[]>response.json())
     }
+
+    getClinic() {
+        return this.http.get('')
+    }
 }

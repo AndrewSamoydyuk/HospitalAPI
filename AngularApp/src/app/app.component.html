@@ -1,20 +1,13 @@
 ﻿<nav>
     <div class="nav-wrapper blue darken-2">
-        <a href="#" class="brand-logo">Logo</a>
+        <a href="#" class="brand-logo">Clinic Service</a>
 
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">JavaScript</a></li>
+            <li><a routerLink="/">Main Page</a></li>
         </ul>
     </div>
 </nav>
 
 <div class="container">
-    <div class="row">
-        <app-clinic 
-            *ngFor="let c of clinics"
-            [clinic]="c"
-        ></app-clinic>
-    </div>
+    <router-outlet></router-outlet>
 </div>

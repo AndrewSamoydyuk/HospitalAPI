@@ -74,8 +74,11 @@
     <Content Include="src\app\app.component.css" />
     <Content Include="src\app\clinic\clinic.component.css" />
     <Content Include="src\app\clinic\clinic.component.html" />
+    <Content Include="src\app\home-page\home-page.component.css" />
+    <Content Include="src\app\home-page\home-page.component.html" />
     <Content Include="src\tsconfig.json" />
     <Content Include="tslint.json" />
+    <TypeScriptCompile Include="src\app\home-page\home-page.component.ts" />
     <TypeScriptCompile Include="src\app\hover.directive.ts" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -109,7 +112,9 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="src\assets\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
