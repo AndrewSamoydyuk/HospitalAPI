@@ -1,4 +1,5 @@
-﻿import { Clinic } from './Clinic';
+﻿import { Clinic } from '../Models/Clinic';
+import { ClinicDetails } from '../Models/ClinicDetails';
 import { Http, Response } from '@angular/http'
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
@@ -14,7 +15,7 @@ export class ClinicsService {
             .map((response: Response) => <Clinic[]>response.json())
     }
 
-    getClinic() {
-        return this.http.get('')
+    getClinic(id: number): Observable<ClinicDetails> {
+        return this.http.get('http://localhost:49761/api/clinics/' + id.toString()).map((response: Response) => <ClinicDetails>response.json())
     }
 }

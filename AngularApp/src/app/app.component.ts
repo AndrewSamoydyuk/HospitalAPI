@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ClinicsService } from './clinics.service';
+import { ClinicsService } from './Services/clinics.service';
 
 @Component({
     selector: 'my-app',
@@ -7,4 +7,4 @@ import { ClinicsService } from './clinics.service';
     styleUrls: ['./app.component.css'],
     providers: [ClinicsService]
 })
-export class AppComponent  { }
+export class AppComponent  {}

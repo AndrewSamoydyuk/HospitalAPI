@@ -1,5 +1,5 @@
 ﻿import { Component, Input } from '@angular/core';
-import { Clinic } from '../Clinic';
+import { Clinic } from '../Models/Clinic';
 
 @Component({
     selector: 'app-clinic',

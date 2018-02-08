@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var clinics_service_1 = require("./clinics.service");
+var clinics_service_1 = require("./Services/clinics.service");
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
     }

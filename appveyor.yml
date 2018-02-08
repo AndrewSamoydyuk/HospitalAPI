@@ -1,4 +1,4 @@
-platform: x64
+platform: Any CPU
 
 configuration: Release
 

@@ -1,6 +1,6 @@
 ﻿import { Component } from '@angular/core';
-import { Clinic } from '../Clinic';
-import { ClinicsService } from '../clinics.service';
+import { Clinic } from '../Models/Clinic';
+import { ClinicsService } from '../Services/clinics.service';
 
 @Component({
     selector: 'app-home-page',
@@ -12,9 +12,13 @@ export class HomePageComponent {
 
     constructor(private clinicsService: ClinicsService) { }
 
+    done: boolean = true;
+
     ngOnInit() {
         this.clinicsService.getClinics()
-            .subscribe(clinicsData => { this.clinics = clinicsData }
-            )
+            .subscribe(clinicsData => {
+                this.clinics = clinicsData;
+                this.done = false;
+            })
     }
 }

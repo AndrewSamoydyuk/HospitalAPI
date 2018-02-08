@@ -1,0 +1,1 @@
+{"version":3,"file":"preloader.component.js","sourceRoot":"","sources":["preloader.component.ts"],"names":[],"mappings":";;;;;;;;AAAA,sCAA0C;AAO1C;IAAA;IAAiC,CAAC;IAArB,kBAAkB;QAL9B,gBAAS,CAAC;YACP,QAAQ,EAAE,eAAe;YACzB,WAAW,EAAE,4BAA4B;YACzC,SAAS,EAAE,CAAC,2BAA2B,CAAC;SAC3C,CAAC;OACW,kBAAkB,CAAG;IAAD,yBAAC;CAAA,AAAlC,IAAkC;AAArB,gDAAkB"}

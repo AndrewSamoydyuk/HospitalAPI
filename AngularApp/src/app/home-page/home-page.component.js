@@ -10,16 +10,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var clinics_service_1 = require("../clinics.service");
+var clinics_service_1 = require("../Services/clinics.service");
 var HomePageComponent = /** @class */ (function () {
     function HomePageComponent(clinicsService) {
         this.clinicsService = clinicsService;
         this.clinics = [];
+        this.done = true;
     }
     HomePageComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.clinicsService.getClinics()
-            .subscribe(function (clinicsData) { _this.clinics = clinicsData; });
+            .subscribe(function (clinicsData) {
+            _this.clinics = clinicsData;
+            _this.done = false;
+        });
     };
     HomePageComponent = __decorate([
         core_1.Component({

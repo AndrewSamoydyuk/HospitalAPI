@@ -1,14 +1,22 @@
-﻿.card-image {
-    height: 140px;
-}
-.card-action {
-    height: 60px !important;
+﻿.my-image {
+    height: 200px !important;
 }
 
-.hovered{
+.clinic-name {
+    color: #f57c00 !important;
+    font-size: 20px;
+    font-family: FrankRuehl;
+}
+
+.card {
+    height: 350px;
+    overflow: hidden;
+}
+
+.hovered {
     transform: scale(1.07);
     box-shadow: 0 0 10px rgba(0,0,0,.5);
     transition: .5s all;
-    z-index:10;
-    cursor:pointer;
+    z-index: 10;
+    cursor: pointer;
 }

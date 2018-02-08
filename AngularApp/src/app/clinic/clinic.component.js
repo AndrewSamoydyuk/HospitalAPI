@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var Clinic_1 = require("../Clinic");
+var Clinic_1 = require("../Models/Clinic");
 var ClinicComponent = /** @class */ (function () {
     function ClinicComponent() {
     }
