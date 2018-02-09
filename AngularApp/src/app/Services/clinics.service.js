@@ -9,23 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var http_1 = require("@angular/http");
 var core_1 = require("@angular/core");
+var http_1 = require("@angular/common/http");
 require("rxjs/add/operator/map");
 var ClinicsService = /** @class */ (function () {
     function ClinicsService(http) {
         this.http = http;
     }
     ClinicsService.prototype.getClinics = function () {
-        return this.http.get('http://localhost:49761/api/clinics')
-            .map(function (response) { return response.json(); });
+        return this.http.get('http://localhost:49761/api/clinics').map(function (data) {
+            return data.map(function (clinic) {
+                return { Id: clinic.Id, Name: clinic.Name, Address: clinic.Address, ImageUri: clinic.ImageUri };
+            });
+        });
     };
     ClinicsService.prototype.getClinic = function (id) {
-        return this.http.get('http://localhost:49761/api/clinics/' + id.toString()).map(function (response) { return response.json(); });
+        var params = new http_1.HttpParams().set('id', id.toString());
+        return this.http.get('http://localhost:49761/api/clinics/', { params: params })
+            .map(function (clinic) { return clinic; });
     };
     ClinicsService = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.Http])
+        __metadata("design:paramtypes", [http_1.HttpClient])
     ], ClinicsService);
     return ClinicsService;
 }());

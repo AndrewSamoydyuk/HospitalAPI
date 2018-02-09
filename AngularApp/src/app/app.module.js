@@ -10,7 +10,7 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var app_component_1 = require("./app.component");
 var clinic_component_1 = require("./clinic/clinic.component");
-var http_1 = require("@angular/http");
+var http_1 = require("@angular/common/http");
 var hover_directive_1 = require("./Directives/hover.directive");
 var home_page_component_1 = require("./home-page/home-page.component");
 var router_1 = require("@angular/router");
@@ -27,7 +27,7 @@ var AppModule = /** @class */ (function () {
         core_1.NgModule({
             imports: [
                 platform_browser_1.BrowserModule,
-                http_1.HttpModule,
+                http_1.HttpClientModule,
                 router_1.RouterModule.forRoot(routes)
             ],
             declarations: [

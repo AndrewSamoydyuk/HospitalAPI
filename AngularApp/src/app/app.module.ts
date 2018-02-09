@@ -1,8 +1,8 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { ClinicComponent } from './clinic/clinic.component';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { HoverDirective } from './Directives/hover.directive';
 import { HomePageComponent } from './home-page/home-page.component';
 import { RouterModule } from '@angular/router';
@@ -11,13 +11,13 @@ import { PreloaderComponent } from './preloader/preloader.component';
 
 const routes = [
     { path: '', component: HomePageComponent },
-    { path: 'clinic/:id', component: ClinicDetailsComponent}
+    { path: 'clinic/:id', component: ClinicDetailsComponent }
 ];
 
 @NgModule({
     imports: [
         BrowserModule,
-        HttpModule,
+        HttpClientModule,
         RouterModule.forRoot(routes)
     ],
     declarations: [
