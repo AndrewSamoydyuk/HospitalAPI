@@ -1,0 +1,46 @@
+﻿.border {
+    list-style: none;
+    padding: 0;
+    margin-left:-10px;
+}
+
+.clinic-name {
+    font-family: "Trebuchet MS", "Lucida Sans";
+    font-size: 25px;
+    letter-spacing: 2px;
+}
+
+.border li {
+    font-family: "Trebuchet MS", "Lucida Sans";
+    padding: 7px 20px;
+    margin-bottom: 25px;
+    width: 65%;
+    border-radius: 5px;
+    box-shadow: 2px -2px 5px 0 rgba(0,0,0,.1), -2px -2px 5px 0 rgba(0,0,0,.1), 2px 2px 5px 0 rgba(0,0,0,.1), -2px 2px 5px 0 rgba(0,0,0,.1);
+    font-size: 15px;
+    letter-spacing: 2px;
+    transition: 0.3s all linear;
+}
+
+.border li:nth-child(2) {
+    margin-left : 20px;
+}
+
+.hovered {
+    transform: scale(1.04);
+    box-shadow: 0 0 10px rgba(0,0,0,.5);
+    transition: .1s all;
+    z-index: 10;
+    cursor:default;
+}
+
+.departmentCard {
+    background-color: #f3f3f3;
+    height: 200px;
+    margin: 15px;
+    width: 250px !important;
+}
+
+.activator{
+    cursor:pointer;
+}

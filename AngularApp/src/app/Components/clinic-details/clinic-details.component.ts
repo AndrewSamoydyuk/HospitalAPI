@@ -1,11 +1,12 @@
 ﻿import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ClinicsService } from '../Services/clinics.service';
-import { Clinic } from '../Models/Clinic';
+import { Clinic } from '../../Models/Clinic';
+import { ClinicsService } from '../../Services/clinics.service';
 
 @Component({
     selector: 'item-info',
-    templateUrl: './clinic-details.component.html'
+    templateUrl: './clinic-details.component.html',
+    styleUrls: ['./clinic-details.component.css']
 })
 
 export class ClinicDetailsComponent {

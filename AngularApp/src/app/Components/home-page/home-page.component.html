@@ -1,0 +1,18 @@
+﻿<app-preloader *ngIf="done"></app-preloader>
+
+<div class="row">
+    <div *ngFor="let clinic of clinics" class="cardDiv col s3">
+        <a [routerLink]="['clinic',clinic.Id]">
+            <div class="card" appHover>
+                <div class="card-image">
+                    <img class="my-image" src="http://localhost:49761/Content/Images/{{clinic.ImageUri}}">
+                </div>
+                <div class="card-content">
+                    <p class="clinic-name">{{clinic.Name}}</p>
+                    <hr />
+                    <p>Address : {{clinic.Address}}</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

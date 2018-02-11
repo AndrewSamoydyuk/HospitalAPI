@@ -72,22 +72,23 @@
     <Content Include="package.json" />
     <None Include="packages.config" />
     <Content Include="src\app\app.component.css" />
-    <Content Include="src\app\clinic-details\clinic-details.component.css" />
-    <Content Include="src\app\clinic-details\clinic-details.component.html" />
-    <Content Include="src\app\clinic\clinic.component.css" />
-    <Content Include="src\app\clinic\clinic.component.html" />
-    <Content Include="src\app\home-page\home-page.component.css" />
-    <Content Include="src\app\home-page\home-page.component.html" />
-    <Content Include="src\app\preloader\preloader.component.css" />
-    <Content Include="src\app\preloader\preloader.component.html" />
+    <Content Include="src\app\Components\clinic-details\clinic-details.component.css" />
+    <Content Include="src\app\Components\clinic-details\clinic-details.component.html" />
+    <Content Include="src\app\Components\home-page\home-page.component.css" />
+    <Content Include="src\app\Components\home-page\home-page.component.html" />
+    <Content Include="src\app\Components\login\login.component.css" />
+    <Content Include="src\app\Components\login\login.component.html" />
+    <Content Include="src\app\Components\preloader\preloader.component.css" />
+    <Content Include="src\app\Components\preloader\preloader.component.html" />
     <Content Include="src\assets\materialize\css\materialize.css" />
     <Content Include="src\assets\materialize\css\materialize.min.css" />
     <Content Include="src\assets\materialize\js\materialize.js" />
     <Content Include="src\assets\materialize\js\materialize.min.js" />
     <Content Include="src\tsconfig.json" />
     <Content Include="tslint.json" />
-    <TypeScriptCompile Include="src\app\clinic-details\clinic-details.component.ts" />
-    <TypeScriptCompile Include="src\app\home-page\home-page.component.ts" />
+    <TypeScriptCompile Include="src\app\Components\clinic-details\clinic-details.component.ts" />
+    <TypeScriptCompile Include="src\app\Components\home-page\home-page.component.ts" />
+    <TypeScriptCompile Include="src\app\Components\login\login.component.ts" />
     <TypeScriptCompile Include="src\app\Directives\hover.directive.ts" />
     <Content Include="src\assets\materialize\fonts\roboto\Roboto-Bold.woff" />
     <Content Include="src\assets\materialize\fonts\roboto\Roboto-Bold.woff2" />
@@ -126,10 +127,11 @@
     <TypeScriptCompile Include="src\app\app.component.ts" />
     <TypeScriptCompile Include="src\app\app.module.ts" />
     <TypeScriptCompile Include="src\app\Models\ClinicDetails.ts" />
+    <TypeScriptCompile Include="src\app\Models\Department.ts" />
+    <TypeScriptCompile Include="src\app\Models\Login.ts" />
     <TypeScriptCompile Include="src\app\Services\clinics.service.ts" />
     <TypeScriptCompile Include="src\app\Models\Clinic.ts" />
-    <TypeScriptCompile Include="src\app\clinic\clinic.component.ts" />
-    <TypeScriptCompile Include="src\app\preloader\preloader.component.ts" />
+    <TypeScriptCompile Include="src\app\Components\preloader\preloader.component.ts" />
     <TypeScriptCompile Include="src\main.ts" />
   </ItemGroup>
   <ItemGroup>

@@ -9,16 +9,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var app_component_1 = require("./app.component");
-var clinic_component_1 = require("./clinic/clinic.component");
 var http_1 = require("@angular/common/http");
 var hover_directive_1 = require("./Directives/hover.directive");
-var home_page_component_1 = require("./home-page/home-page.component");
+var home_page_component_1 = require("./Components/home-page/home-page.component");
 var router_1 = require("@angular/router");
-var clinic_details_component_1 = require("./clinic-details/clinic-details.component");
-var preloader_component_1 = require("./preloader/preloader.component");
+var clinic_details_component_1 = require("./Components/clinic-details/clinic-details.component");
+var preloader_component_1 = require("./Components/preloader/preloader.component");
+var login_component_1 = require("./Components/login/login.component");
+var forms_1 = require("@angular/forms");
 var routes = [
     { path: '', component: home_page_component_1.HomePageComponent },
-    { path: 'clinic/:id', component: clinic_details_component_1.ClinicDetailsComponent }
+    { path: 'clinic/:id', component: clinic_details_component_1.ClinicDetailsComponent },
+    { path: 'login', component: login_component_1.LoginComponent }
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -28,15 +30,16 @@ var AppModule = /** @class */ (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 http_1.HttpClientModule,
+                forms_1.FormsModule,
                 router_1.RouterModule.forRoot(routes)
             ],
             declarations: [
                 app_component_1.AppComponent,
-                clinic_component_1.ClinicComponent,
                 hover_directive_1.HoverDirective,
                 home_page_component_1.HomePageComponent,
                 clinic_details_component_1.ClinicDetailsComponent,
-                preloader_component_1.PreloaderComponent
+                preloader_component_1.PreloaderComponent,
+                login_component_1.LoginComponent
             ],
             bootstrap: [
                 app_component_1.AppComponent

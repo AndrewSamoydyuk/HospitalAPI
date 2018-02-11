@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-var clinics_service_1 = require("../Services/clinics.service");
-var Clinic_1 = require("../Models/Clinic");
+var Clinic_1 = require("../../Models/Clinic");
+var clinics_service_1 = require("../../Services/clinics.service");
 var ClinicDetailsComponent = /** @class */ (function () {
     function ClinicDetailsComponent(activateRoute, clinicsService) {
         this.activateRoute = activateRoute;
@@ -30,7 +30,8 @@ var ClinicDetailsComponent = /** @class */ (function () {
     ClinicDetailsComponent = __decorate([
         core_1.Component({
             selector: 'item-info',
-            templateUrl: './clinic-details.component.html'
+            templateUrl: './clinic-details.component.html',
+            styleUrls: ['./clinic-details.component.css']
         }),
         __metadata("design:paramtypes", [router_1.ActivatedRoute, clinics_service_1.ClinicsService])
     ], ClinicDetailsComponent);

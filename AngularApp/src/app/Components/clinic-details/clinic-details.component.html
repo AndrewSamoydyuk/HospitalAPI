@@ -1,0 +1,38 @@
+﻿<div class="col s12 m8 offset-m2 l6 offset-l3">
+    <div class="card-panel grey lighten-5 z-depth-1">
+        <p class="clinic-name center-align">{{clinic.Name | uppercase}}</p>
+        <div class="row valign-wrapper">
+            <div class="col s5">
+                <img class="circle responsive-img" src="http://localhost:49761/Content/Images/{{clinic.ImageUri}}">
+            </div>
+            <div class="col s10">
+                <ul class="border">
+                    <li appHover>Address : {{clinic.Address}}</li>
+                    <li appHover>Count of departments :{{clinic.CountOfDepartments}}</li>
+                    <li appHover>Count of doctors : {{clinic.CountOfDoctors}}</li>
+                </ul>
+            </div>
+        </div>
+        <p class="clinic-name center-align">Departments</p>
+
+        <div class="row">
+            <div class="col offset-l1">
+                <div *ngFor="let dep of clinic.Departments" class="card col s3 departmentCard">
+                    <div class="card-content">
+                        <p class="card-title">{{dep.Name}}</p>
+                        <span class="activator grey-text text-darken-4">Show statistics<i class="material-icons right">more_vert</i></span>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Statistics<i class="material-icons right">close</i></span>
+                        <ul>
+                            <li>Cured : {{dep.ResultsOfTreatment.CountOfCured}}</li>
+                            <li>Not cured : {{dep.ResultsOfTreatment.CountOfNotCured}}</li>
+                            <li>On treatment  : {{dep.ResultsOfTreatment.CountOfOnTreatment}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
