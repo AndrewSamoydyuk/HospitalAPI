@@ -1,5 +1,5 @@
 ﻿import { Component } from '@angular/core';
-import { Clinic } from '../../Models/Clinic';
+import { Clinic } from '../../Models/clinic';
 import { ClinicsService } from '../../Services/clinics.service';
 
 @Component({
@@ -8,17 +8,21 @@ import { ClinicsService } from '../../Services/clinics.service';
     styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent {
-    clinics: Clinic[] = []
+    clinics: Clinic[] = [];
 
     constructor(private clinicsService: ClinicsService) { }
 
     done: boolean = true;
 
     ngOnInit() {
+        this.getClinics();
+    }
+
+    getClinics(): void {
         this.clinicsService.getClinics()
-            .subscribe(clinicsData => {
-                this.clinics = clinicsData;
+            .subscribe(clinics => {
+                this.clinics = clinics;
                 this.done = false;
-            })
+            });
     }
 }

@@ -8,20 +8,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
-var app_component_1 = require("./app.component");
+var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/common/http");
+var app_routing_module_1 = require("./app-routing.module");
 var hover_directive_1 = require("./Directives/hover.directive");
+var app_component_1 = require("./app.component");
 var home_page_component_1 = require("./Components/home-page/home-page.component");
-var router_1 = require("@angular/router");
 var clinic_details_component_1 = require("./Components/clinic-details/clinic-details.component");
 var preloader_component_1 = require("./Components/preloader/preloader.component");
 var login_component_1 = require("./Components/login/login.component");
-var forms_1 = require("@angular/forms");
-var routes = [
-    { path: '', component: home_page_component_1.HomePageComponent },
-    { path: 'clinic/:id', component: clinic_details_component_1.ClinicDetailsComponent },
-    { path: 'login', component: login_component_1.LoginComponent }
-];
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -31,7 +26,7 @@ var AppModule = /** @class */ (function () {
                 platform_browser_1.BrowserModule,
                 http_1.HttpClientModule,
                 forms_1.FormsModule,
-                router_1.RouterModule.forRoot(routes)
+                app_routing_module_1.AppRoutingModule
             ],
             declarations: [
                 app_component_1.AppComponent,

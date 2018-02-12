@@ -11,21 +11,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-var Clinic_1 = require("../../Models/Clinic");
 var clinics_service_1 = require("../../Services/clinics.service");
+var common_1 = require("@angular/common");
 var ClinicDetailsComponent = /** @class */ (function () {
-    function ClinicDetailsComponent(activateRoute, clinicsService) {
-        this.activateRoute = activateRoute;
+    function ClinicDetailsComponent(route, clinicsService, location) {
+        this.route = route;
         this.clinicsService = clinicsService;
-        this.clinic = new Clinic_1.Clinic();
-        this.id = activateRoute.snapshot.params['id'];
+        this.location = location;
     }
     ClinicDetailsComponent.prototype.ngOnInit = function () {
+        this.getClinic();
+    };
+    ClinicDetailsComponent.prototype.getClinic = function () {
         var _this = this;
-        this.clinicsService.getClinic(this.id)
-            .subscribe(function (clinicData) {
-            _this.clinic = clinicData;
-        });
+        var id = +this.route.snapshot.paramMap.get('id');
+        this.clinicsService.getClinic(id)
+            .subscribe(function (clinic) { return _this.clinic = clinic; });
+    };
+    ClinicDetailsComponent.prototype.goBack = function () {
+        this.location.back();
     };
     ClinicDetailsComponent = __decorate([
         core_1.Component({
@@ -33,7 +37,9 @@ var ClinicDetailsComponent = /** @class */ (function () {
             templateUrl: './clinic-details.component.html',
             styleUrls: ['./clinic-details.component.css']
         }),
-        __metadata("design:paramtypes", [router_1.ActivatedRoute, clinics_service_1.ClinicsService])
+        __metadata("design:paramtypes", [router_1.ActivatedRoute,
+            clinics_service_1.ClinicsService,
+            common_1.Location])
     ], ClinicDetailsComponent);
     return ClinicDetailsComponent;
 }());

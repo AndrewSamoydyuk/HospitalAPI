@@ -7,13 +7,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var Login_1 = require("../../Models/Login");
 var LoginComponent = /** @class */ (function () {
     function LoginComponent() {
-        this.loginModel = new Login_1.Login("", "");
     }
     LoginComponent.prototype.login = function (email, password) {
-        this.loginModel = new Login_1.Login(email, password);
+        this.loginModel = { email: email, password: password };
     };
     LoginComponent = __decorate([
         core_1.Component({

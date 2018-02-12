@@ -6,4 +6,4 @@ var ClinicDetails = /** @class */ (function () {
     return ClinicDetails;
 }());
 exports.ClinicDetails = ClinicDetails;
-//# sourceMappingURL=ClinicDetails.js.map
+//# sourceMappingURL=clinic-details.js.map

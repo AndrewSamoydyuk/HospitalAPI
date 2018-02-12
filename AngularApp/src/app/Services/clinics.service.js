@@ -12,12 +12,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
 require("rxjs/add/operator/map");
+var httpOptions = { headers: new http_1.HttpHeaders({ 'Content-Type': 'application/json' }) };
 var ClinicsService = /** @class */ (function () {
     function ClinicsService(http) {
         this.http = http;
+        this.clinicUrl = 'http://localhost:49761/api/clinics';
     }
     ClinicsService.prototype.getClinics = function () {
-        return this.http.get('http://localhost:49761/api/clinics').map(function (data) {
+        return this.http.get(this.clinicUrl).map(function (data) {
             return data.map(function (clinic) {
                 return { Id: clinic.Id, Name: clinic.Name, Address: clinic.Address, ImageUri: clinic.ImageUri };
             });
@@ -25,7 +27,7 @@ var ClinicsService = /** @class */ (function () {
     };
     ClinicsService.prototype.getClinic = function (id) {
         var params = new http_1.HttpParams().set('id', id.toString());
-        return this.http.get('http://localhost:49761/api/clinics/', { params: params })
+        return this.http.get(this.clinicUrl, { params: params })
             .map(function (clinic) { return clinic; });
     };
     ClinicsService = __decorate([

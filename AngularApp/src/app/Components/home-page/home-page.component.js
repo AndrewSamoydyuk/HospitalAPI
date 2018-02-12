@@ -18,10 +18,13 @@ var HomePageComponent = /** @class */ (function () {
         this.done = true;
     }
     HomePageComponent.prototype.ngOnInit = function () {
+        this.getClinics();
+    };
+    HomePageComponent.prototype.getClinics = function () {
         var _this = this;
         this.clinicsService.getClinics()
-            .subscribe(function (clinicsData) {
-            _this.clinics = clinicsData;
+            .subscribe(function (clinics) {
+            _this.clinics = clinics;
             _this.done = false;
         });
     };

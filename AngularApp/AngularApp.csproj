@@ -86,6 +86,7 @@
     <Content Include="src\assets\materialize\js\materialize.min.js" />
     <Content Include="src\tsconfig.json" />
     <Content Include="tslint.json" />
+    <TypeScriptCompile Include="src\app\app-routing.module.ts" />
     <TypeScriptCompile Include="src\app\Components\clinic-details\clinic-details.component.ts" />
     <TypeScriptCompile Include="src\app\Components\home-page\home-page.component.ts" />
     <TypeScriptCompile Include="src\app\Components\login\login.component.ts" />
@@ -126,11 +127,11 @@
     <TypeScriptCompile Include="src\app\app.component.spec.ts" />
     <TypeScriptCompile Include="src\app\app.component.ts" />
     <TypeScriptCompile Include="src\app\app.module.ts" />
-    <TypeScriptCompile Include="src\app\Models\ClinicDetails.ts" />
-    <TypeScriptCompile Include="src\app\Models\Department.ts" />
-    <TypeScriptCompile Include="src\app\Models\Login.ts" />
+    <TypeScriptCompile Include="src\app\Models\clinic-details.ts" />
+    <TypeScriptCompile Include="src\app\Models\department.ts" />
+    <TypeScriptCompile Include="src\app\Models\login.ts" />
     <TypeScriptCompile Include="src\app\Services\clinics.service.ts" />
-    <TypeScriptCompile Include="src\app\Models\Clinic.ts" />
+    <TypeScriptCompile Include="src\app\Models\clinic.ts" />
     <TypeScriptCompile Include="src\app\Components\preloader\preloader.component.ts" />
     <TypeScriptCompile Include="src\main.ts" />
   </ItemGroup>

@@ -1,7 +1,8 @@
 ﻿import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Clinic } from '../../Models/Clinic';
+import { Clinic } from '../../Models/clinic';
 import { ClinicsService } from '../../Services/clinics.service';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'item-info',
@@ -11,17 +12,25 @@ import { ClinicsService } from '../../Services/clinics.service';
 
 export class ClinicDetailsComponent {
 
-    clinic: Clinic = new Clinic();
-    id: number;
-    constructor(private activateRoute: ActivatedRoute, private clinicsService: ClinicsService) {
+    clinic: Clinic;
 
-        this.id = activateRoute.snapshot.params['id'];
-    }
+    constructor(
+        private route: ActivatedRoute,
+        private clinicsService: ClinicsService,
+        private location: Location
+    ) {}
 
     ngOnInit() {
-        this.clinicsService.getClinic(this.id)
-            .subscribe(clinicData => {
-                this.clinic = clinicData
-            })
+        this.getClinic();
+    }
+
+    getClinic(): void {
+        const id = +this.route.snapshot.paramMap.get('id');
+        this.clinicsService.getClinic(id)
+            .subscribe(clinic => this.clinic = clinic);
+    }
+
+    goBack(): void {
+        this.location.back();
     }
 }
