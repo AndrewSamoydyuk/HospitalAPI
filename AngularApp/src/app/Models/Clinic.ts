@@ -1,6 +1,8 @@
 ﻿export class Clinic {
-    Id: number;
-    Name: string;
-    Address: string;
-    ImageUri: string;
+    constructor(
+        public Id: number,
+        public Name: string,
+        public Address: string,
+        public ImageUri: string
+    ) { }
 }

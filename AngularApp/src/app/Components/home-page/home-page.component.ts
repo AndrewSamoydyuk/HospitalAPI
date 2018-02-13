@@ -25,4 +25,20 @@ export class HomePageComponent {
                 this.done = false;
             });
     }
+
+    addClinic(clinic: Clinic): void {
+        this.clinicsService.addClinic(clinic)
+            .subscribe(clinic => this.clinics.push(clinic));
+    }
+
+    uodateClinic(clinic: Clinic): void {
+        this.clinicsService.updateClinic(clinic)
+            .subscribe(clinic => this.clinics.push(clinic));
+    }
+
+    deleteClinic(id: number): void {
+        this.clinicsService.deleteClinic(id)
+            .subscribe();
+    }
+
 }

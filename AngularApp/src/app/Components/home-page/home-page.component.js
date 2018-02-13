@@ -28,6 +28,20 @@ var HomePageComponent = /** @class */ (function () {
             _this.done = false;
         });
     };
+    HomePageComponent.prototype.addClinic = function (clinic) {
+        var _this = this;
+        this.clinicsService.addClinic(clinic)
+            .subscribe(function (clinic) { return _this.clinics.push(clinic); });
+    };
+    HomePageComponent.prototype.uodateClinic = function (clinic) {
+        var _this = this;
+        this.clinicsService.updateClinic(clinic)
+            .subscribe(function (clinic) { return _this.clinics.push(clinic); });
+    };
+    HomePageComponent.prototype.deleteClinic = function (id) {
+        this.clinicsService.deleteClinic(id)
+            .subscribe();
+    };
     HomePageComponent = __decorate([
         core_1.Component({
             selector: 'app-home-page',

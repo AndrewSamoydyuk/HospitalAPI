@@ -1,1 +1,1 @@
-{"version":3,"file":"clinic.js","sourceRoot":"","sources":["clinic.ts"],"names":[],"mappings":";;AAAA;IAAA;IAKA,CAAC;IAAD,aAAC;AAAD,CAAC,AALD,IAKC;AALY,wBAAM"}
+{"version":3,"file":"clinic.js","sourceRoot":"","sources":["clinic.ts"],"names":[],"mappings":";;AAAA;IACI,gBACW,EAAU,EACV,IAAY,EACZ,OAAe,EACf,QAAgB;QAHhB,OAAE,GAAF,EAAE,CAAQ;QACV,SAAI,GAAJ,IAAI,CAAQ;QACZ,YAAO,GAAP,OAAO,CAAQ;QACf,aAAQ,GAAR,QAAQ,CAAQ;IACvB,CAAC;IACT,aAAC;AAAD,CAAC,AAPD,IAOC;AAPY,wBAAM"}

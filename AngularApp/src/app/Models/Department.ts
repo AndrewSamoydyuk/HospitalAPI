@@ -1,11 +1,15 @@
 ﻿export class Department {
-    Id: number;
-    Name: string;
-    ResultsOfTreatment: ResultsOfTreatment;
+    constructor(
+        public Id: number,
+        public Name: string,
+        public ResultsOfTreatment: ResultsOfTreatment
+    ) { }
 }
 
 class ResultsOfTreatment {
-    CountOfCured: number;
-    CountOfNotCured: number;
-    CountOfOnTreatment: number;
+    constructor(
+        public CountOfCured: number,
+        public CountOfNotCured: number,
+        public CountOfOnTreatment: number
+    ) { }
 }
