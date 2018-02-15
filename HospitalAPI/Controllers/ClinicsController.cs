@@ -13,6 +13,7 @@ using HospitalAPI.Helpers;
 using System.Data.Entity.Infrastructure;
 using System.Threading.Tasks;
 using System.Data.Entity.Core;
+using System.Web.Http.Cors;
 
 namespace HospitalAPI.Controllers
 {
@@ -103,21 +104,13 @@ namespace HospitalAPI.Controllers
         // POST api/Clinics
         [HttpPost]
         [ValidateModel]
-        [ResponseType(typeof(ClinicDTO))]
+        [ResponseType(typeof(void))]
         public IHttpActionResult PostClinic([FromBody]Clinic clinic)
         {
             clinicRepository.AddClinic(clinic);
             clinicRepository.Save();
 
-            var clinicDTO = new ClinicDTO()
-            {
-                Id = clinic.Id,
-                Name = clinic.Name,
-                Address = clinic.Address,
-                ImageUri = clinic.ImageUri
-            };
-
-            return CreatedAtRoute("DefaultApi", new { id = clinic.Id }, clinicDTO);
+            return StatusCode(HttpStatusCode.Created);
         }
 
 

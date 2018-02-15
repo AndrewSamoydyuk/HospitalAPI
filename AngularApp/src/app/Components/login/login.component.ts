@@ -1,5 +1,7 @@
-﻿import { Component } from '@angular/core';
-import { Login } from '../../Models/login';
+﻿import { Component, Output, EventEmitter } from '@angular/core';
+import { AuthenticationService } from '../../Services/authentication.service';
+import { Location } from '@angular/common';
+import { SharedService } from '../../Services/shared.service';
 
 @Component({
     selector: 'app-login',
@@ -7,9 +9,22 @@ import { Login } from '../../Models/login';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-    loginModel: Login;
+    constructor(
+        private authService: AuthenticationService,
+        private location: Location,
+        private sharedService : SharedService
+    ) { }
+
+    ngOnInit() {
+        this.authService.logout();
+    }
 
     login(email: string, password: string) {
-        this.loginModel = { email : email, password : password };
+        this.authService.login(email, password)
+            .subscribe(() => {
+                this.sharedService.showUser();
+                this.location.back();
+            });
     }
+
 }

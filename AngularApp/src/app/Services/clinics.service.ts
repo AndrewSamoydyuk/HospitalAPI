@@ -11,8 +11,7 @@ import { ClinicDetails } from '../Models/clinic-details';
 
 const httpOptions = {
     headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'my-auth-token'
+        'Content-Type': 'application/json'
     })
 };
 
@@ -44,12 +43,11 @@ export class ClinicsService {
     }
 
     addClinic(clinic: Clinic): Observable<Clinic> {
-        return this.http.post<Clinic>(this.clinicUrl, clinic, httpOptions)
+        return this.http.post<Clinic>(this.clinicUrl, JSON.stringify(clinic), httpOptions)
             .pipe(
                 catchError(this.hangleError)
             );
     }
-
 
     deleteClinic(id: number): Observable<{}> {
         const params = new HttpParams().set('id', id.toString());

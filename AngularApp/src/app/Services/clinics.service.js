@@ -16,8 +16,7 @@ var retry_1 = require("rxjs/operators/retry");
 var ErrorObservable_1 = require("rxjs/observable/ErrorObservable");
 var httpOptions = {
     headers: new http_1.HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'my-auth-token'
+        'Content-Type': 'application/json'
     })
 };
 var ClinicsService = /** @class */ (function () {
@@ -35,7 +34,7 @@ var ClinicsService = /** @class */ (function () {
             .pipe(retry_1.retry(3), catchError_1.catchError(this.hangleError));
     };
     ClinicsService.prototype.addClinic = function (clinic) {
-        return this.http.post(this.clinicUrl, clinic, httpOptions)
+        return this.http.post(this.clinicUrl, JSON.stringify(clinic), httpOptions)
             .pipe(catchError_1.catchError(this.hangleError));
     };
     ClinicsService.prototype.deleteClinic = function (id) {

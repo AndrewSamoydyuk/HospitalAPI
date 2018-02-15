@@ -28,10 +28,9 @@ var HomePageComponent = /** @class */ (function () {
             _this.done = false;
         });
     };
-    HomePageComponent.prototype.addClinic = function (clinic) {
-        var _this = this;
-        this.clinicsService.addClinic(clinic)
-            .subscribe(function (clinic) { return _this.clinics.push(clinic); });
+    HomePageComponent.prototype.addClinic = function () {
+        this.clinicsService.addClinic({ Id: 1, Name: "name", Address: "address", ImageUri: "imageUrl" })
+            .subscribe();
     };
     HomePageComponent.prototype.uodateClinic = function (clinic) {
         var _this = this;

@@ -19,6 +19,7 @@ using HospitalAPI.App_Start;
 using HospitalAPI.Filters;
 using HospitalAPI.DALs;
 using HospitalAPI.Results;
+using System.Web.Http.Cors;
 
 namespace HospitalAPI.Controllers
 {

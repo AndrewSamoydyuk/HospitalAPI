@@ -20,6 +20,9 @@ namespace HospitalAPI.App_Start
 
         public void Configuration(IAppBuilder app)
         {
+
+            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+
             app.CreatePerOwinContext(HospitalContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);

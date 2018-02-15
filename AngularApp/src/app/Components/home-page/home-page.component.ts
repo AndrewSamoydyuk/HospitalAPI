@@ -26,9 +26,9 @@ export class HomePageComponent {
             });
     }
 
-    addClinic(clinic: Clinic): void {
-        this.clinicsService.addClinic(clinic)
-            .subscribe(clinic => this.clinics.push(clinic));
+    addClinic(): void {
+        this.clinicsService.addClinic({ Id:1, Name: "name", Address: "address", ImageUri: "imageUrl" } as Clinic)
+            .subscribe();
     }
 
     uodateClinic(clinic: Clinic): void {
