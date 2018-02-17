@@ -12,6 +12,7 @@ var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/common/http");
 var app_routing_module_1 = require("./app-routing.module");
 var hover_directive_1 = require("./Directives/hover.directive");
+var click_directive_1 = require("./Directives/click.directive");
 var clinics_service_1 = require("./Services/clinics.service");
 var authentication_service_1 = require("./Services/authentication.service");
 var jwt_interceptor_1 = require("./jwt.interceptor");
@@ -38,7 +39,8 @@ var AppModule = /** @class */ (function () {
                 home_page_component_1.HomePageComponent,
                 clinic_details_component_1.ClinicDetailsComponent,
                 preloader_component_1.PreloaderComponent,
-                login_component_1.LoginComponent
+                login_component_1.LoginComponent,
+                click_directive_1.ClickDirective
             ],
             bootstrap: [
                 app_component_1.AppComponent

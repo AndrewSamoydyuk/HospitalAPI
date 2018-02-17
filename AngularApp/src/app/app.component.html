@@ -1,20 +1,32 @@
 ﻿<nav>
     <div class="nav-wrapper cyan darken-4">
         <a routerLink="/" class="brand-logo marginLeft">Clinic Service</a>
+        <a appearByClick [elementId]="'links-mobile'" class="button-collapse right showLinks"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li *ngIf="currentUser;else logout">Welcome, {{currentUser.userName}}!</li>
             <li *ngIf="currentUser"><a (click)="hideUser()" routerLink="/login"> Logout </a></li>
             <ng-template #logout>
                 <li><a routerLink="/login"> Login </a></li>
             </ng-template>
-                <li><a routerLink="/"> Main Page </a></li>
+            <li><a routerLink="/"> Main Page </a></li>
         </ul>
     </div>
 </nav>
 
-<div class="container content">
-    <router-outlet (userChanged)="updateUserStatus()"></router-outlet>
+<div id="links-mobile">
+    <ul class="border">
+        <li *ngIf="currentUser;else logout">Welcome, {{currentUser.userName}}!</li>
+        <li *ngIf="currentUser"><a (click)="hideUser()" routerLink="/login"> Logout </a></li>
+        <ng-template #logout>
+            <li><a routerLink="/login"> Login </a></li>
+        </ng-template>
+        <li><a routerLink="/"> Main Page </a></li>
+    </ul>
 </div>
+
+
+<router-outlet></router-outlet>
+
 
 <footer class="page-footer cyan darken-4">
     <div class="container">

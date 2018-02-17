@@ -96,6 +96,7 @@
     <Content Include="src\app\Components\preloader\preloader.component.html" />
     <Content Include="src\assets\materialize\css\materialize.css" />
     <Content Include="src\assets\materialize\css\materialize.min.css" />
+    <Content Include="src\assets\materialize\js\app.js" />
     <Content Include="src\assets\materialize\js\materialize.js" />
     <Content Include="src\assets\materialize\js\materialize.min.js" />
     <Content Include="src\tsconfig.json" />
@@ -105,6 +106,7 @@
     <TypeScriptCompile Include="src\app\Components\clinic-details\clinic-details.component.ts" />
     <TypeScriptCompile Include="src\app\Components\home-page\home-page.component.ts" />
     <TypeScriptCompile Include="src\app\Components\login\login.component.ts" />
+    <TypeScriptCompile Include="src\app\Directives\click.directive.ts" />
     <TypeScriptCompile Include="src\app\Directives\hover.directive.ts" />
     <Content Include="src\assets\materialize\fonts\roboto\Roboto-Bold.woff" />
     <Content Include="src\assets\materialize\fonts\roboto\Roboto-Bold.woff2" />

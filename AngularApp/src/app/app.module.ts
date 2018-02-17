@@ -6,6 +6,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { HoverDirective } from './Directives/hover.directive';
+import { ClickDirective } from './Directives/click.directive';
 
 import { ClinicsService } from './Services/clinics.service';
 import { AuthenticationService } from './Services/authentication.service';
@@ -32,7 +33,8 @@ import { SharedService } from './Services/shared.service';
         HomePageComponent,
         ClinicDetailsComponent,
         PreloaderComponent,
-        LoginComponent
+        LoginComponent,
+        ClickDirective
     ],
     bootstrap: [
         AppComponent

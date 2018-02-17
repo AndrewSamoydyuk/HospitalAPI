@@ -26,4 +26,40 @@
     cursor: pointer;
 }
 
+.blurEffect {
+    margin-top: -90px;
+    display: none;
+    z-index: 2;
+    position: fixed ;
+    width: 100vw ;
+    height: 110vh ;
+    background-color: rgba(25, 23, 23, 0.80);
+}
+
+.create-form {
+    border: 1px solid;
+    border-radius: 5px;
+    margin-top: 10%;
+    width: 450px;
+    background-color: rgba(0, 0, 0,.9);
+}
+
+.create-form form {
+    margin: 10px;
+    padding: 10px;
+}
+
+.create-form form input {
+    width: 90%;
+}
+
+.create-form form button {
+    width: 90%;
+}
+
+.create-form a {
+    cursor: pointer;
+}
+
+
 

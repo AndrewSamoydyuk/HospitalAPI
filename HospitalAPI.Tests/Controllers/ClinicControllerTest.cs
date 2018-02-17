@@ -10,10 +10,10 @@ using System.Collections.Generic;
 using System;
 using System.IO;
 using System.Net;
-using System.Web.Http.Results;
 using System.Web.Http;
 using System.Data.Entity.Core;
 using System.Web.Configuration;
+using System.Web.Http.Results;
 
 namespace HospitalAPI.Tests.Controllers
 {

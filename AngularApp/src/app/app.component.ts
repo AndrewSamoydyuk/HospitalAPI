@@ -1,6 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
 import { CommonChild, eventSubscriber } from './common-child.interface';
-
 import { SharedService } from './Services/shared.service';
 
 @Component({
@@ -27,5 +26,4 @@ export class AppComponent {
     hideUser() {
         this.currentUser = null;
     }
-
 }
