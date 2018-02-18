@@ -13,7 +13,6 @@ using HospitalAPI.Helpers;
 using System.Data.Entity.Infrastructure;
 using System.Threading.Tasks;
 using System.Data.Entity.Core;
-using System.Web.Http.Cors;
 
 namespace HospitalAPI.Controllers
 {
@@ -110,7 +109,7 @@ namespace HospitalAPI.Controllers
             clinicRepository.AddClinic(clinic);
             clinicRepository.Save();
 
-            return StatusCode(HttpStatusCode.Created);
+            return Ok(clinic);
         }
 
 
@@ -161,7 +160,7 @@ namespace HospitalAPI.Controllers
                     Content = new StringContent($"No clinic with id - {id}")
                 });
             }
-
+            ImageHandler.DeleteImageIfExist(clinic.ImageUri);
             clinicRepository.DeleteClinic(clinic);
             clinicRepository.Save();
 

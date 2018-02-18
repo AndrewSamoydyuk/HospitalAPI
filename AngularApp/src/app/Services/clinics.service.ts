@@ -49,6 +49,15 @@ export class ClinicsService {
             );
     }
 
+    //api/clinics / { id: int } / updateImage
+    updateImage(image: any, id: number): Observable<{}> {
+        const url = `${this.clinicUrl}/${id}/updateImage`;
+        return this.http.post(url, image)
+            .pipe(
+                catchError(this.hangleError)
+            );
+    }
+
     deleteClinic(id: number): Observable<{}> {
         const params = new HttpParams().set('id', id.toString());
 

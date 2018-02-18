@@ -28,11 +28,24 @@ var HomePageComponent = /** @class */ (function () {
             _this.done = false;
         });
     };
-    HomePageComponent.prototype.addClinic = function () {
-        this.clinicsService.addClinic({ Id: 1, Name: "name", Address: "address", ImageUri: "imageUrl" })
-            .subscribe();
+    HomePageComponent.prototype.addClinic = function (name, address) {
+        var _this = this;
+        var clinic = { Id: 1, Name: name, Address: address, ImageUri: "image.png" };
+        var formData = new FormData();
+        var fileBrowser = this.clinicImage.nativeElement;
+        formData.append("image", fileBrowser.files[0]);
+        this.clinicsService.addClinic(clinic)
+            .subscribe(function (data) {
+            clinic = data;
+            _this.updateImage(formData, clinic.Id);
+        });
     };
-    HomePageComponent.prototype.uodateClinic = function (clinic) {
+    HomePageComponent.prototype.updateImage = function (formData, Id) {
+        var _this = this;
+        this.clinicsService.updateImage(formData, Id)
+            .subscribe(function () { return _this.getClinics(); });
+    };
+    HomePageComponent.prototype.updateClinic = function (clinic) {
         var _this = this;
         this.clinicsService.updateClinic(clinic)
             .subscribe(function (clinic) { return _this.clinics.push(clinic); });
@@ -40,7 +53,12 @@ var HomePageComponent = /** @class */ (function () {
     HomePageComponent.prototype.deleteClinic = function (id) {
         this.clinicsService.deleteClinic(id)
             .subscribe();
+        this.clinics = this.clinics.filter(function (h) { return h.Id !== id; });
     };
+    __decorate([
+        core_1.ViewChild('clinicImage'),
+        __metadata("design:type", Object)
+    ], HomePageComponent.prototype, "clinicImage", void 0);
     HomePageComponent = __decorate([
         core_1.Component({
             selector: 'app-home-page',

@@ -37,6 +37,12 @@ var ClinicsService = /** @class */ (function () {
         return this.http.post(this.clinicUrl, JSON.stringify(clinic), httpOptions)
             .pipe(catchError_1.catchError(this.hangleError));
     };
+    //api/clinics / { id: int } / updateImage
+    ClinicsService.prototype.updateImage = function (image, id) {
+        var url = this.clinicUrl + "/" + id + "/updateImage";
+        return this.http.post(url, image)
+            .pipe(catchError_1.catchError(this.hangleError));
+    };
     ClinicsService.prototype.deleteClinic = function (id) {
         var params = new http_1.HttpParams().set('id', id.toString());
         return this.http.delete(this.clinicUrl, { params: params })

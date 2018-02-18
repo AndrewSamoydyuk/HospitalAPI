@@ -49,8 +49,7 @@ namespace HospitalAPI.DALs
                                             },
                               CountOfDepartments = c.Departments.Count(),
                               CountOfDoctors = (from d in c.Departments
-                                                select d.Doctors.Count()).Sum()
-
+                                                select (int?)d.Doctors.Count()).Sum()??0
 
                           }).SingleOrDefault();
 

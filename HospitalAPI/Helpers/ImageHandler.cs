@@ -22,15 +22,15 @@ namespace HospitalAPI.Helpers
                 await fs.WriteAsync(fileArray, 0, fileArray.Length);
             }
 
-            return"~/Content/Images/" + filename;
+            return filename;
             
         }
 
         public static void DeleteImageIfExist(string imageUri)
         {
-            if (System.IO.File.Exists(HttpContext.Current.Server.MapPath(imageUri)))
+            if (System.IO.File.Exists(HttpContext.Current.Server.MapPath("~/Content/Images/"+imageUri)))
             {
-                System.IO.File.Delete(HttpContext.Current.Server.MapPath(imageUri));
+                System.IO.File.Delete(HttpContext.Current.Server.MapPath("~/Content/Images/"+imageUri));
             }
         }
     }

@@ -61,5 +61,16 @@
     cursor: pointer;
 }
 
+.create-form form div {
+    color:azure;
+}
+
+.clinic-manage{
+    display:inline-block;
+}
+
+.clinic-manage p{
+    display: inline-block;
+}
 
 

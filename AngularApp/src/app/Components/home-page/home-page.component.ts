@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, ViewChild } from '@angular/core';
 import { Clinic } from '../../Models/clinic';
 import { ClinicsService } from '../../Services/clinics.service';
 
@@ -9,6 +9,7 @@ import { ClinicsService } from '../../Services/clinics.service';
 })
 export class HomePageComponent {
     clinics: Clinic[] = [];
+    @ViewChild('clinicImage') clinicImage : any;
 
     constructor(private clinicsService: ClinicsService) { }
 
@@ -26,19 +27,34 @@ export class HomePageComponent {
             });
     }
 
-    addClinic(): void {
-        this.clinicsService.addClinic({ Id:1, Name: "name", Address: "address", ImageUri: "imageUrl" } as Clinic)
-            .subscribe();
+    addClinic(name: string, address: string): void {
+        let clinic: Clinic = { Id: 1, Name: name, Address: address, ImageUri: "image.png" };
+        const formData = new FormData();
+        let fileBrowser = this.clinicImage.nativeElement;
+        formData.append("image", fileBrowser.files[0])
+
+        this.clinicsService.addClinic(clinic)
+            .subscribe(data => {              
+                clinic = data;
+                this.updateImage(formData, clinic.Id);
+            });
+
     }
 
-    uodateClinic(clinic: Clinic): void {
+    updateImage(formData: FormData, Id: number): void {
+        this.clinicsService.updateImage(formData, Id)
+            .subscribe(() => this.getClinics());
+    }
+
+    updateClinic(clinic: Clinic): void {
         this.clinicsService.updateClinic(clinic)
             .subscribe(clinic => this.clinics.push(clinic));
     }
 
-    deleteClinic(id: number): void {
+    deleteClinic(id: number): void {        
         this.clinicsService.deleteClinic(id)
             .subscribe();
+        this.clinics = this.clinics.filter(h => h.Id !== id);
     }
 
 }

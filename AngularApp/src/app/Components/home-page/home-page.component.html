@@ -4,27 +4,27 @@
         <form class="col s12 ">
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="name" type="password" class="validate">
+                    <input #clinicName id="name" type="text" class="validate">
                     <label for="name">Name</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="address" type="email" class="validate">
+                    <input #clinicAddress id="address" type="text" class="validate">
                     <label for="address">Adress</label>
                 </div>
             </div>
             <div class="file-field input-field">
                 <div class="btn">
                     <span>Upload</span>
-                    <input type="file">
+                    <input #clinicImage type="file">
                 </div>
                 <div class="file-path-wrapper">
                     <input class="file-path validate" type="text" placeholder="Upload image of the clinic">
                 </div>
             </div>
             <div class="row">
-                <button class="btn offset-l2 waves-effect waves-light" type="submit" name="action">
+                <button appearByClick [elementId]="'blurEffect'" (click)="addClinic(clinicName.value,clinicAddress.value)" class="btn offset-l2 waves-effect waves-light" type="submit" name="action">
                     Add
                 </button>
             </div>
@@ -33,15 +33,18 @@
 </div>
 
 <div class="container content">
-
-    <app-preloader *ngIf="done"></app-preloader>
     <a appearByClick [elementId]="'blurEffect'" class="left btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+    <app-preloader *ngIf="done"></app-preloader>
     <br />
     <br />
     <br />
 
     <div class="row">
         <div *ngFor="let clinic of clinics" class="cardDiv col s3">
+            <div class="clinic-manage">
+                <i appHover (click)="deleteClinic(clinic.Id)" class="material-icons">close</i>
+                <i appHover class="material-icons">edit</i>
+            </div>
             <a [routerLink]="['clinic',clinic.Id]">
                 <div class="card" appHover>
                     <div class="card-image">
